@@ -1,109 +1,93 @@
-Sprite_Puyo_Red:	mappingsTable
-
-	mappingsTableEntry.l	Sprite_Puyo_Red_0
-	mappingsTableEntry.l	Sprite_Puyo_Red_1
-	mappingsTableEntry.l	Sprite_Puyo_Red_2
-	mappingsTableEntry.l	Sprite_Puyo_Red_3
-	mappingsTableEntry.l	Sprite_Puyo_Red_4
-	mappingsTableEntry.l	Sprite_Puyo_Red_5
-	mappingsTableEntry.l	Sprite_Puyo_Red_6
-	mappingsTableEntry.l	Sprite_Puyo_Red_7
-	mappingsTableEntry.l	Sprite_Puyo_Red_8
+Sprite_Puyo_Red_Normal:	Equ 0
+Sprite_Puyo_Red_Highlight:	Equ 1
+Sprite_Puyo_Red_Squashed:	Equ 2
+Sprite_Puyo_Red_Stretched:	Equ 3
+Sprite_Puyo_Red_Pop_Large:	Equ 4
+Sprite_Puyo_Red_Pop_Medium:	Equ 5
+Sprite_Puyo_Red_Pop_Small:	Equ 6
+Sprite_Puyo_Red_Shadow:	Equ 7
+Sprite_Puyo_Red_Shocked:	Equ 8
 
 ; ---------------------------------------------------------------------------
 
-Sprite_Puyo_Red_0:	spriteHeader
+Sprites_Puyo_Red:    mappingsTable
+	mappingsTableEntry.l	Puyo_Red_Normal
+	mappingsTableEntry.l	Puyo_Red_Highlight
+	mappingsTableEntry.l	Puyo_Red_Squashed
+	mappingsTableEntry.l	Puyo_Red_Stretched
+	mappingsTableEntry.l	Puyo_Red_Pop_Large
+	mappingsTableEntry.l	Puyo_Red_Pop_Medium
+	mappingsTableEntry.l	Puyo_Red_Pop_Small
+	mappingsTableEntry.l	Puyo_Red_Shadow
+	mappingsTableEntry.l	Puyo_Red_Shocked
 
+; ---------------------------------------------------------------------------
+
+Puyo_Red_Normal:	spriteHeader
 	; X, Y, Width, Height, Tile, X Flip, Y Flip, Palette, Priority, Link
-
 	spritePiece -8, -8, 2, 2, $100, 0, 0, 0, 0, 1
 	spritePiece -2, -2, 2, 2, $14C, 0, 0, 3, 0, 3
-
-Sprite_Puyo_Red_0_End
+Puyo_Red_Normal_End
 
 ; ---------------------------------------------------------------------------
 
-Sprite_Puyo_Red_1:	spriteHeader
-
+Puyo_Red_Highlight:	spriteHeader
 	; X, Y, Width, Height, Tile, X Flip, Y Flip, Palette, Priority, Link
-
 	spritePiece -8, -8, 2, 2, $148, 0, 0, 0, 0, 1
 	spritePiece -2, -2, 2, 2, $14C, 0, 0, 3, 0, 3
-
-Sprite_Puyo_Red_1_End
+Puyo_Red_Highlight_End
 
 ; ---------------------------------------------------------------------------
 
-Sprite_Puyo_Red_2:	spriteHeader
-
+Puyo_Red_Squashed:	spriteHeader
 	; X, Y, Width, Height, Tile, X Flip, Y Flip, Palette, Priority, Link
-
 	spritePiece -8, -8, 2, 2, $140, 0, 0, 0, 0, 1
 	spritePiece -2, -2, 2, 2, $14C, 0, 0, 3, 0, 3
-
-Sprite_Puyo_Red_2_End
+Puyo_Red_Squashed_End
 
 ; ---------------------------------------------------------------------------
 
-Sprite_Puyo_Red_3:	spriteHeader
-
+Puyo_Red_Stretched:	spriteHeader
 	; X, Y, Width, Height, Tile, X Flip, Y Flip, Palette, Priority, Link
-
 	spritePiece -8, -8, 2, 2, $144, 0, 0, 0, 0, 1
 	spritePiece -2, -2, 2, 2, $14C, 0, 0, 3, 0, 3
-
-Sprite_Puyo_Red_3_End
+Puyo_Red_Stretched_End
 
 ; ---------------------------------------------------------------------------
 
-Sprite_Puyo_Red_4:	spriteHeader
-
+Puyo_Red_Pop_Large:	spriteHeader
 	; X, Y, Width, Height, Tile, X Flip, Y Flip, Palette, Priority, Link
-
 	spritePiece -8, -8, 2, 2, $31C, 0, 0, 0, 0, 2
-
-Sprite_Puyo_Red_4_End
+Puyo_Red_Pop_Large_End
 
 ; ---------------------------------------------------------------------------
 
-Sprite_Puyo_Red_5:	spriteHeader
-
+Puyo_Red_Pop_Medium:	spriteHeader
 	; X, Y, Width, Height, Tile, X Flip, Y Flip, Palette, Priority, Link
-
 	spritePiece -4, -4, 1, 1, $324, 0, 0, 0, 0, 2
-
-Sprite_Puyo_Red_5_End
+Puyo_Red_Pop_Medium_End
 
 ; ---------------------------------------------------------------------------
 
-Sprite_Puyo_Red_6:	spriteHeader
-
+Puyo_Red_Pop_Small:	spriteHeader
 	; X, Y, Width, Height, Tile, X Flip, Y Flip, Palette, Priority, Link
-
 	spritePiece -4, -4, 1, 1, $326, 0, 0, 0, 0, 2
-
-Sprite_Puyo_Red_6_End
+Puyo_Red_Pop_Small_End
 
 ; ---------------------------------------------------------------------------
 
-Sprite_Puyo_Red_7:	spriteHeader
-
+Puyo_Red_Shadow:	spriteHeader
 	; X, Y, Width, Height, Tile, X Flip, Y Flip, Palette, Priority, Link
-
 	spritePiece -2, -2, 2, 2, $14C, 0, 0, 3, 0, 3
-
-Sprite_Puyo_Red_7_End
+Puyo_Red_Shadow_End
 
 ; ---------------------------------------------------------------------------
 
-Sprite_Puyo_Red_8:	spriteHeader
-
+Puyo_Red_Shocked:	spriteHeader
 	; X, Y, Width, Height, Tile, X Flip, Y Flip, Palette, Priority, Link
-
 	spritePiece -8, -8, 2, 2, $150, 0, 0, 0, 0, 1
 	spritePiece -2, -2, 2, 2, $14C, 0, 0, 3, 0, 3
-
-Sprite_Puyo_Red_8_End
+Puyo_Red_Shocked_End
 
 ; ---------------------------------------------------------------------------
 

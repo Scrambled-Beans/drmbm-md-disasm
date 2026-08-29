@@ -1,109 +1,93 @@
-Sprite_Puyo_Purple:    mappingsTable
-
-	mappingsTableEntry.l	Sprite_Puyo_Purple_0
-	mappingsTableEntry.l	Sprite_Puyo_Purple_1
-	mappingsTableEntry.l	Sprite_Puyo_Purple_2
-	mappingsTableEntry.l	Sprite_Puyo_Purple_3
-	mappingsTableEntry.l	Sprite_Puyo_Purple_4
-	mappingsTableEntry.l	Sprite_Puyo_Purple_5
-	mappingsTableEntry.l	Sprite_Puyo_Purple_6
-	mappingsTableEntry.l	Sprite_Puyo_Purple_7
-	mappingsTableEntry.l	Sprite_Puyo_Purple_8
+Sprite_Puyo_Purple_Normal:	Equ 0
+Sprite_Puyo_Purple_Highlight:	Equ 1
+Sprite_Puyo_Purple_Squashed:	Equ 2
+Sprite_Puyo_Purple_Stretched:	Equ 3
+Sprite_Puyo_Purple_Pop_Large:	Equ 4
+Sprite_Puyo_Purple_Pop_Medium:	Equ 5
+Sprite_Puyo_Purple_Pop_Small:	Equ 6
+Sprite_Puyo_Purple_Shadow:	Equ 7
+Sprite_Puyo_Purple_Shocked:	Equ 8
 
 ; ---------------------------------------------------------------------------
 
-Sprite_Puyo_Purple_0:	spriteHeader
+Sprites_Puyo_Purple:    mappingsTable
+	mappingsTableEntry.l	Puyo_Purple_Normal
+	mappingsTableEntry.l	Puyo_Purple_Highlight
+	mappingsTableEntry.l	Puyo_Purple_Squashed
+	mappingsTableEntry.l	Puyo_Purple_Stretched
+	mappingsTableEntry.l	Puyo_Purple_Pop_Large
+	mappingsTableEntry.l	Puyo_Purple_Pop_Medium
+	mappingsTableEntry.l	Puyo_Purple_Pop_Small
+	mappingsTableEntry.l	Puyo_Purple_Shadow
+	mappingsTableEntry.l	Puyo_Purple_Shocked
 
+; ---------------------------------------------------------------------------
+
+Puyo_Purple_Normal:	spriteHeader
 	; X, Y, Width, Height, Tile, X Flip, Y Flip, Palette, Priority, Link
-
 	spritePiece -8, -8, 2, 2, $250, 0, 0, 1, 0, 1
 	spritePiece -2, -2, 2, 2, $29C, 0, 0, 3, 0, 3
-
-Sprite_Puyo_Purple_0_End
+Puyo_Purple_Normal_End
 
 ; ---------------------------------------------------------------------------
 
-Sprite_Puyo_Purple_1:	spriteHeader
-
+Puyo_Purple_Highlight:	spriteHeader
 	; X, Y, Width, Height, Tile, X Flip, Y Flip, Palette, Priority, Link
-
 	spritePiece -8, -8, 2, 2, $298, 0, 0, 1, 0, 1
 	spritePiece -2, -2, 2, 2, $29C, 0, 0, 3, 0, 3
-
-Sprite_Puyo_Purple_1_End
+Puyo_Purple_Highlight_End
 
 ; ---------------------------------------------------------------------------
 
-Sprite_Puyo_Purple_2:	spriteHeader
-
+Puyo_Purple_Squashed:	spriteHeader
 	; X, Y, Width, Height, Tile, X Flip, Y Flip, Palette, Priority, Link
-
 	spritePiece -8, -8, 2, 2, $290, 0, 0, 1, 0, 1
 	spritePiece -2, -2, 2, 2, $29C, 0, 0, 3, 0, 3
-
-Sprite_Puyo_Purple_2_End
+Puyo_Purple_Squashed_End
 
 ; ---------------------------------------------------------------------------
 
-Sprite_Puyo_Purple_3:	spriteHeader
-
+Puyo_Purple_Stretched:	spriteHeader
 	; X, Y, Width, Height, Tile, X Flip, Y Flip, Palette, Priority, Link
-
 	spritePiece -8, -8, 2, 2, $294, 0, 0, 1, 0, 1
 	spritePiece -2, -2, 2, 2, $29C, 0, 0, 3, 0, 3
-
-Sprite_Puyo_Purple_3_End
+Puyo_Purple_Stretched_End
 
 ; ---------------------------------------------------------------------------
 
-Sprite_Puyo_Purple_4:	spriteHeader
-
+Puyo_Purple_Pop_Large:	spriteHeader
 	; X, Y, Width, Height, Tile, X Flip, Y Flip, Palette, Priority, Link
-
 	spritePiece -8, -8, 2, 2, $320, 0, 0, 1, 0, 2
-
-Sprite_Puyo_Purple_4_End
+Puyo_Purple_Pop_Large_End
 
 ; ---------------------------------------------------------------------------
 
-Sprite_Puyo_Purple_5:	spriteHeader
-
+Puyo_Purple_Pop_Medium:	spriteHeader
 	; X, Y, Width, Height, Tile, X Flip, Y Flip, Palette, Priority, Link
-
 	spritePiece -4, -4, 1, 1, $325, 0, 0, 1, 0, 2
-
-Sprite_Puyo_Purple_5_End
+Puyo_Purple_Pop_Medium_End
 
 ; ---------------------------------------------------------------------------
 
-Sprite_Puyo_Purple_6:	spriteHeader
-
+Puyo_Purple_Pop_Small:	spriteHeader
 	; X, Y, Width, Height, Tile, X Flip, Y Flip, Palette, Priority, Link
-
 	spritePiece -4, -4, 1, 1, $327, 0, 0, 1, 0, 2
-
-Sprite_Puyo_Purple_6_End
+Puyo_Purple_Pop_Small_End
 
 ; ---------------------------------------------------------------------------
 
-Sprite_Puyo_Purple_7:	spriteHeader
-
+Puyo_Purple_Shadow:	spriteHeader
 	; X, Y, Width, Height, Tile, X Flip, Y Flip, Palette, Priority, Link
-
 	spritePiece -2, -2, 2, 2, $29C, 0, 0, 3, 0, 3
-
-Sprite_Puyo_Purple_7_End
+Puyo_Purple_Shadow_End
 
 ; ---------------------------------------------------------------------------
 
-Sprite_Puyo_Purple_8:	spriteHeader
-
+Puyo_Purple_Shocked:	spriteHeader
 	; X, Y, Width, Height, Tile, X Flip, Y Flip, Palette, Priority, Link
-
 	spritePiece -8, -8, 2, 2, $2A0, 0, 0, 1, 0, 1
 	spritePiece -2, -2, 2, 2, $29C, 0, 0, 3, 0, 3
-
-Sprite_Puyo_Purple_8_End
+Puyo_Purple_Shocked_End
 
 ; ---------------------------------------------------------------------------
 
