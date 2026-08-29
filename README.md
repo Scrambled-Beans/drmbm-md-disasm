@@ -22,11 +22,13 @@ If you use this disassembly for any rom hacks, please can you put the following 
 3 - Run "build (Windows).bat" to build the rom.<br/>
 4 - The built rom can be found in the "output" folder.
 
+
 ## Sprite Editing
 
-Use Flex2-Puyo: https://github.com/Nasina7/Flex2-Puyo/releases<br/>
+Use Flex2: https://github.com/kirjavascript/Flex2/releases<br/>
 <br/>
-A work-in-progress project to edit the sprites can be found in the following folder: include > projects > Flex2-Puyo 
+A work-in-progress project file to edit the sprites can be found in the following folder: include > projects > Flex2
+
 
 ## Issues/Improvements
 
@@ -36,6 +38,7 @@ Please do not submit an issue relating to ROM-Hacking the game. Instead, please 
 - https://forums.sonicretro.org/forums/engineering-reverse-engineering.13/
 - https://sonicresearch.org/community/index.php
 - https://www.romhacking.net
+
 
 ## Contributing
 
