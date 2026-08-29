@@ -1,0 +1,507 @@
+{
+    "Flex": 2,
+    "name": "",
+    "objects": [
+        {
+            "name": "Beans",
+            "children": [
+                {
+                    "format": "Puyo Puyo.js",
+                    "name": "Red",
+                    "palettes": [
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\Stage - Red and Yellow.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\Stage - Blue and Purple.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\puyo1\\Board - Grass.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\puyo1\\White.pal",
+                            "length": 1
+                        }
+                    ],
+                    "art": {
+                        "path": "..\\..\\..\\resources\\art\\art_sor\\uncompressed\\Stage - Puyo and Carbuncle.unc",
+                        "compression": "Uncompressed",
+                        "offset": 0,
+                        "extra": []
+                    },
+                    "mappings": {
+                        "path": "..\\..\\..\\resources\\mappings\\sprite\\Puyo Red.asm",
+                        "label": "Sprites_Puyo_Red"
+                    },
+                    "dplcs": {
+                        "enabled": false,
+                        "path": "",
+                        "label": ""
+                    },
+                    "config": {
+                        "mapMacros": true,
+                        "tileOffset": "0x100",
+                        "dplcTiles": 0
+                    },
+                    "expanded": true
+                },
+                {
+                    "format": "Puyo Puyo.js",
+                    "name": "Yellow",
+                    "palettes": [
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\Stage - Red and Yellow.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\Stage - Blue and Purple.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\puyo1\\Board - Grass.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\puyo1\\White.pal",
+                            "length": 1
+                        }
+                    ],
+                    "art": {
+                        "path": "..\\..\\..\\resources\\art\\art_sor\\uncompressed\\Stage - Puyo and Carbuncle.unc",
+                        "compression": "Uncompressed",
+                        "offset": 0,
+                        "extra": []
+                    },
+                    "mappings": {
+                        "path": "..\\..\\..\\resources\\mappings\\sprite\\Puyo Yellow.asm",
+                        "label": "Sprites_Puyo_Yellow"
+                    },
+                    "dplcs": {
+                        "enabled": false,
+                        "path": "",
+                        "label": ""
+                    },
+                    "config": {
+                        "mapMacros": true,
+                        "tileOffset": "0x100",
+                        "dplcTiles": 0
+                    },
+                    "expanded": true
+                },
+                {
+                    "format": "Puyo Puyo.js",
+                    "name": "Blue",
+                    "palettes": [
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\Stage - Blue and Purple.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\Stage - Blue and Purple.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\puyo1\\Board - Grass.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\puyo1\\White.pal",
+                            "length": 1
+                        }
+                    ],
+                    "art": {
+                        "path": "..\\..\\..\\resources\\art\\art_sor\\uncompressed\\Stage - Puyo and Carbuncle.unc",
+                        "compression": "Uncompressed",
+                        "offset": 0,
+                        "extra": []
+                    },
+                    "mappings": {
+                        "path": "..\\..\\..\\resources\\mappings\\sprite\\Puyo Blue.asm",
+                        "label": "Sprites_Puyo_Blue"
+                    },
+                    "dplcs": {
+                        "enabled": false,
+                        "path": "",
+                        "label": ""
+                    },
+                    "config": {
+                        "mapMacros": true,
+                        "tileOffset": "0x100",
+                        "dplcTiles": "0"
+                    },
+                    "expanded": true
+                },
+                {
+                    "format": "Puyo Puyo.js",
+                    "name": "Purple",
+                    "palettes": [
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\Stage - Blue and Purple.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\Stage - Blue and Purple.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\puyo1\\Board - Grass.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\puyo1\\White.pal",
+                            "length": 1
+                        }
+                    ],
+                    "art": {
+                        "path": "..\\..\\..\\resources\\art\\art_sor\\uncompressed\\Stage - Puyo and Carbuncle.unc",
+                        "compression": "Uncompressed",
+                        "offset": 0,
+                        "extra": []
+                    },
+                    "mappings": {
+                        "path": "..\\..\\..\\resources\\mappings\\sprite\\Puyo Purple.asm",
+                        "label": "Sprites_Puyo_Purple"
+                    },
+                    "dplcs": {
+                        "enabled": false,
+                        "path": "",
+                        "label": ""
+                    },
+                    "config": {
+                        "mapMacros": true,
+                        "tileOffset": "0x100",
+                        "dplcTiles": "0"
+                    },
+                    "expanded": true
+                },
+                {
+                    "format": "Puyo Puyo.js",
+                    "name": "Green",
+                    "palettes": [
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\puyo1\\Board - Grass.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\Stage - Blue and Purple.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\puyo1\\Board - Grass.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\puyo1\\White.pal",
+                            "length": 1
+                        }
+                    ],
+                    "art": {
+                        "path": "..\\..\\..\\resources\\art\\art_sor\\uncompressed\\Stage - Puyo and Carbuncle.unc",
+                        "compression": "Uncompressed",
+                        "offset": 0,
+                        "extra": []
+                    },
+                    "mappings": {
+                        "path": "..\\..\\..\\resources\\mappings\\sprite\\Puyo Green.asm",
+                        "label": "Sprites_Puyo_Green"
+                    },
+                    "dplcs": {
+                        "enabled": false,
+                        "path": "",
+                        "label": ""
+                    },
+                    "config": {
+                        "mapMacros": true,
+                        "tileOffset": "0x100",
+                        "dplcTiles": "0"
+                    }
+                },
+                {
+                    "format": "Puyo Puyo.js",
+                    "name": "Refugee",
+                    "palettes": [
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\Stage - Red and Yellow.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\Stage - Blue and Purple.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\puyo1\\Board - Grass.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\puyo1\\White.pal",
+                            "length": 1
+                        }
+                    ],
+                    "art": {
+                        "path": "..\\..\\..\\resources\\art\\art_sor\\uncompressed\\Stage - Puyo and Carbuncle.unc",
+                        "compression": "Uncompressed",
+                        "offset": 0,
+                        "extra": [
+                            {
+                                "path": "..\\..\\..\\resources\\art\\art_sor\\uncompressed\\Font - Battle.unc",
+                                "compression": "Uncompressed",
+                                "address": 1024
+                            }
+                        ]
+                    },
+                    "mappings": {
+                        "path": "..\\..\\..\\resources\\mappings\\sprite\\Stage.asm",
+                        "label": "Sprites_Stage"
+                    },
+                    "dplcs": {
+                        "enabled": false,
+                        "path": "",
+                        "label": ""
+                    },
+                    "config": {
+                        "mapMacros": true,
+                        "tileOffset": "0x100",
+                        "dplcTiles": 0
+                    }
+                }
+            ],
+            "isDirectory": true,
+            "expanded": false
+        },
+        {
+            "name": "Cutscene",
+            "children": [
+                {
+                    "format": "Puyo Puyo.js",
+                    "name": "Robotnik",
+                    "palettes": [
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\Cutscene - Dr Robotnik.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\puyo1\\White.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\puyo1\\White.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\Cutscene - Dr Robotnik.pal",
+                            "length": 1
+                        }
+                    ],
+                    "art": {
+                        "path": "..\\..\\..\\resources\\art\\art_unc\\Cutscene - Dr Robotnik (Frame 1).unc",
+                        "compression": "Uncompressed",
+                        "offset": 0,
+                        "extra": [
+                            {
+                                "path": "..\\..\\..\\resources\\art\\art_unc\\Cutscene - Dr Robotnik (Frame 2).unc",
+                                "compression": "Uncompressed",
+                                "offset": 0,
+                                "address": "88"
+                            },
+                            {
+                                "path": "..\\..\\..\\resources\\art\\art_unc\\Cutscene - Dr Robotnik (Frame 3).unc",
+                                "compression": "Uncompressed",
+                                "offset": 0,
+                                "address": "176"
+                            },
+                            {
+                                "path": "..\\..\\..\\resources\\art\\art_unc\\Cutscene - Dr Robotnik (Frame 4).unc",
+                                "compression": "Uncompressed",
+                                "offset": 0,
+                                "address": "264"
+                            },
+                            {
+                                "path": "..\\..\\..\\resources\\art\\art_unc\\Cutscene - Dr Robotnik (Frame 5).unc",
+                                "compression": "Uncompressed",
+                                "offset": 0,
+                                "address": "352"
+                            },
+                            {
+                                "path": "..\\..\\..\\resources\\art\\art_unc\\Cutscene - Dr Robotnik (Frame 6).unc",
+                                "compression": "Uncompressed",
+                                "offset": 0,
+                                "address": "440"
+                            },
+                            {
+                                "path": "..\\..\\..\\resources\\art\\art_unc\\Cutscene - Dr Robotnik (Frame 7).unc",
+                                "compression": "Uncompressed",
+                                "offset": 0,
+                                "address": "528"
+                            },
+                            {
+                                "path": "..\\..\\..\\resources\\art\\art_unc\\Cutscene - Dr Robotnik (Frame 8).unc",
+                                "compression": "Uncompressed",
+                                "offset": 0,
+                                "address": "616"
+                            },
+                            {
+                                "path": "..\\..\\..\\resources\\art\\art_unc\\Cutscene - Dr Robotnik (Frame 9).unc",
+                                "compression": "Uncompressed",
+                                "offset": 0,
+                                "address": "704"
+                            },
+                            {
+                                "path": "..\\..\\..\\resources\\art\\art_unc\\Cutscene - Dr Robotnik (Frame 10).unc",
+                                "compression": "Uncompressed",
+                                "offset": 0,
+                                "address": "792"
+                            }
+                        ]
+                    },
+                    "mappings": {
+                        "path": "..\\..\\..\\resources\\mappings\\sprite\\Cutscene - Dr Robotnik.asm",
+                        "label": "Sprite_Cutscene_Robotnik"
+                    },
+                    "dplcs": {
+                        "enabled": true,
+                        "path": "..\\..\\..\\resources\\mappings\\DPLC\\Cutscene (Stage) - Dr Robotnik.asm",
+                        "label": "DPLC_Robotnik_Stage"
+                    },
+                    "config": {
+                        "mapMacros": true,
+                        "tileOffset": "0x100",
+                        "dplcTiles": "88"
+                    }
+                },
+                {
+                    "format": "Puyo Puyo.js",
+                    "name": "Scratch",
+                    "palettes": [
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\Cutscene - Scratch.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\puyo1\\White.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\puyo1\\White.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\Cutscene - Scratch.pal",
+                            "length": 1
+                        }
+                    ],
+                    "art": {
+                        "path": "..\\..\\..\\resources\\art\\art_nem\\uncompressed\\Cutscene - Scratch.unc",
+                        "compression": "Uncompressed",
+                        "offset": 0,
+                        "extra": []
+                    },
+                    "mappings": {
+                        "path": "..\\..\\..\\resources\\mappings\\sprite\\Cutscene - Scratch.asm",
+                        "label": "Sprites_Cutscene_Scratch"
+                    },
+                    "dplcs": {
+                        "enabled": false,
+                        "path": "",
+                        "label": ""
+                    },
+                    "config": {
+                        "mapMacros": true,
+                        "tileOffset": "0x400",
+                        "dplcTiles": 0
+                    }
+                }
+            ],
+            "isDirectory": true,
+            "expanded": false
+        },
+        {
+            "name": "Stage",
+            "children": [
+                {
+                    "format": "Puyo Puyo.js",
+                    "name": "Has Bean",
+                    "palettes": [
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\Stage - Red and Yellow.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\puyo1\\White.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\puyo1\\White.pal",
+                            "length": 1
+                        },
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\puyo1\\White.pal",
+                            "length": 1
+                        }
+                    ],
+                    "art": {
+                        "path": "..\\..\\..\\resources\\art\\art_sor\\uncompressed\\Stage - Puyo and Carbuncle.unc",
+                        "compression": "Uncompressed",
+                        "offset": 0,
+                        "extra": []
+                    },
+                    "mappings": {
+                        "path": "..\\..\\..\\resources\\mappings\\sprite\\Carbuncle.asm",
+                        "label": "Sprites_Carbuncle"
+                    },
+                    "dplcs": {
+                        "enabled": false,
+                        "path": "",
+                        "label": ""
+                    },
+                    "config": {
+                        "mapMacros": true,
+                        "tileOffset": "0x100",
+                        "dplcTiles": 0
+                    }
+                }
+            ],
+            "isDirectory": true,
+            "expanded": false
+        },
+        {
+            "name": "Misc",
+            "children": [
+                {
+                    "format": "Puyo Puyo.js",
+                    "name": "Sega Logo",
+                    "palettes": [
+                        {
+                            "path": "..\\..\\..\\resources\\palettes\\line\\Sega Logo.pal",
+                            "length": 1
+                        }
+                    ],
+                    "art": {
+                        "path": "..\\..\\..\\resources\\art\\art_nem\\uncompressed\\Sega Logo.unc",
+                        "compression": "Uncompressed",
+                        "offset": 0,
+                        "extra": []
+                    },
+                    "mappings": {
+                        "path": "..\\..\\..\\resources\\mappings\\sprite\\Sega Logo.asm",
+                        "label": "Sprites_Sega_logo"
+                    },
+                    "dplcs": {
+                        "enabled": false,
+                        "path": "",
+                        "label": ""
+                    },
+                    "config": {
+                        "mapMacros": true,
+                        "tileOffset": "0x100",
+                        "dplcTiles": 0
+                    }
+                }
+            ],
+            "isDirectory": true,
+            "expanded": true
+        }
+    ]
+}
