@@ -1,6 +1,6 @@
 ; ===========================================================================
 ;
-;	Dr. Robotnik's Mean Bean Machine (Mega Drive) - Disassembly (v1.2)
+;	Dr. Robotnik's Mean Bean Machine (Mega Drive) - Disassembly (v1.3)
 ;
 ;	Original game by Compile & SEGA (© 1993)
 ;
