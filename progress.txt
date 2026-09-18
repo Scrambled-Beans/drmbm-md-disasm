@@ -7,3 +7,4 @@ RadioTails
 
 TomboyDragon
 - Options Code.
+- Looks like DaxKatter has made some progress on the sound side of MBM Krafttwerk Protottype (https://github.com/Rose-Group/kraftwerkdisasm). I will need to check, but in theory, this should be compatible with the original release. Will look at doing that in October.
