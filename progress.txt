@@ -1,10 +1,10 @@
 List of what is currently being updated:
 
 RadioTails
-- Sprite Mappings.
+- Sprite Mappings (I have extracted all of them - Need to check and name the labels).
 - Puyo1 Mappings.
 - Rename fix palettes pointers (code).
 
 TomboyDragon
 - Options Code.
-- Looks like DaxKatter has made some progress on the sound side of MBM Krafttwerk Protottype (https://github.com/Rose-Group/kraftwerkdisasm). I will need to check, but in theory, this should be compatible with the original release. Will look at doing that in October.
+- Looks like DaxKatter has made some progress on the sound side of MBM Krafttwerk Prototype (https://github.com/Rose-Group/kraftwerkdisasm). I will need to check, but in theory, this should be compatible with the original release. Will look at doing that in October.
