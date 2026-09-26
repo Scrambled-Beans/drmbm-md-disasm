@@ -64,6 +64,7 @@ Any updates that are being contributed will first have to be checked by RadioTai
 - Ralakimus<br/>
 - Nasina<br/>
 - TomboyDragon<br/>
+- mightyrock24<br/>
 - Neto<br/>
 - DaxKatter<br/>
 - ArcaniaCQ<br/>
