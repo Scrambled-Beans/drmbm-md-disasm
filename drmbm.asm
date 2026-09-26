@@ -32,7 +32,7 @@
 ;
 ; ---------------------------------------------------------------------------
 ;
-;	Last Updated: 08/29/2026 21:50:05 (M/D/Y)
+;	Last Updated: 09/26/2026 18:05:01 (M/D/Y)
 ;
 ; ===========================================================================
 
@@ -67,6 +67,7 @@
 	include "include/macros/cube2asm (sound driver).asm"
 	include	"include/macros/mega drive.asm"	
 	include	"include/macros/sprite mappings.asm"
+	include	"include/macros/sprite settings.asm"
 	
 	include	"include/macros/set password.asm"
 	include	"include/macros/default options.asm"
@@ -3132,7 +3133,7 @@ Pal_ArmsIntro:
 	incbin	"resources/palettes/line/Cutscene - Arms.pal"
 	
 Pal_DifficultyFaces:
-	incbin	"resources/palettes/line/2P - Difficulty Faces.pal"
+	incbin	"resources/palettes/line/Select Level - Arms (Lv 1).pal"
 	
 Pal_SpikeIntro:
 	incbin	"resources/palettes/line/Cutscene - Spike.pal"
@@ -4564,31 +4565,26 @@ loc_42BE:
 ; End of function sub_4294
 
 ; ---------------------------------------------------------------------------
-word_42C8:	dc.w 6
-	dc.w $2A
-	dc.w $24C
-	dc.w $48E
-	dc.w $666
-	dc.w $404
-	dc.w $A46
-	dc.w $C8A
-	dc.w $46
-	dc.w $AC
-	dc.w $40
-	dc.w $282
-	dc.w $4A6
-	dc.w $46
-	dc.w $AC
-	dc.w 4
-	dc.w $48
-	dc.w $48C
-	dc.w $8CE
-	dc.w $CE
-	dc.w $624
-	dc.w $A48
-	dc.w $E8A
-	dc.w $64E
-	dc.w $2CE
+
+word_42C8:	; Select Level - Faces - Palettes
+
+	; Each Face has 5 Colors
+
+	; Level 1 - Arms
+	incbin	"resources/palettes/line/Select Level - Arms (Lv 1).pal", 8, 10
+	
+	; Level 2 - Frankly
+	incbin	"resources/palettes/line/Select Level - Frankly (Lv 2).pal", 8, 10
+	
+	; Level 3 - Humpty
+	incbin	"resources/palettes/line/Select Level - Humpty (Lv 3).pal", 8, 10
+	
+	; Level 4 - Coconuts
+	incbin	"resources/palettes/line/Select Level - Coconuts (Lv 4).pal", 8, 10
+	
+	; Level 5 - Davy Sprocket
+	incbin	"resources/palettes/line/Select Level - Davy Sprocket (Lv 5).pal", 8, 10
+	
 ; ---------------------------------------------------------------------------
 
 loc_42FA:
@@ -16724,12 +16720,13 @@ unk_B224:	dc.b  $F
 LoadSegaLogo:
 	lea	(ActSegaLogo).l,a1
 	jsr	(FindActorSlot).l
-	bcs.s	.NoSpace
-	move.b	#$32,aMappings(a1)
-	move.w	#$20,aX(a1)
-	move.w	#$E0,aY(a1)
-	move.b	#$80,aDrawFlags(a1)
-	move.l	#Anim_SegaLogo,aAnim(a1)
+	bcs.s .NoSpace
+	
+	spriteTable		Sprites_Sega_Logo		; Sprite Mapping
+	spritePosX		32						; X Position
+	spritePosY		224						; Y Position	
+	spriteDraw		$80						; Draw Flags	
+	spriteAnim		Anim_Sega_Logo			; Animations
 
 .NoSpace:
 	rts
@@ -16849,49 +16846,29 @@ PalCycle_SegaLogo:
 	incbin	"resources/palettes/cycle/sega logo/logo 2.pal"
 	even
 	
-Anim_SegaLogo:
-	dc.b   	3
-	dc.b   	0
-	dc.b   	3
-	dc.b   	1
-	dc.b   	3
-	dc.b   	2
-	dc.b   	3
-	dc.b   	3
-	dc.b   	3
-	dc.b   	4
-	dc.b   	3
-	dc.b   	5
-	dc.b   	3
-	dc.b   	6
-	dc.b   	3
-	dc.b   	7
-	dc.b   	3
-	dc.b   	8
-	dc.b   	3
-	dc.b   	9
-	dc.b   	3
-	dc.b	10
-	dc.b   	3
-	dc.b  	11
-	dc.b  	3
-	dc.b  	12
-	dc.b   	3
-	dc.b  	13
-	dc.b   	3
-	dc.b  	14
-	dc.b   	3
-	dc.b  	15
-	dc.b   	3
-	dc.b 	16
-	dc.b   	3
-	dc.b 	17
-	dc.b   	3
-	dc.b 	18
+Anim_Sega_Logo:			; Pause, Frame
+	spriteAnimFrame		3, Sprite_Sega_Logo_Start
+	spriteAnimFrame		3, Sprite_Sega_Logo_1
+	spriteAnimFrame		3, Sprite_Sega_Logo_2
+	spriteAnimFrame		3, Sprite_Sega_Logo_3
+	spriteAnimFrame		3, Sprite_Sega_Logo_4
+	spriteAnimFrame		3, Sprite_Sega_Logo_5
+	spriteAnimFrame		3, Sprite_Sega_Logo_6
+	spriteAnimFrame		3, Sprite_Sega_Logo_7
+	spriteAnimFrame		3, Sprite_Sega_Logo_8
+	spriteAnimFrame		3, Sprite_Sega_Logo_9
+	spriteAnimFrame		3, Sprite_Sega_Logo_10
+	spriteAnimFrame		3, Sprite_Sega_Logo_11
+	spriteAnimFrame		3, Sprite_Sega_Logo_12
+	spriteAnimFrame		3, Sprite_Sega_Logo_13
+	spriteAnimFrame		3, Sprite_Sega_Logo_14
+	spriteAnimFrame		3, Sprite_Sega_Logo_15
+	spriteAnimFrame		3, Sprite_Sega_Logo_16
+	spriteAnimFrame		3, Sprite_Sega_Logo_17
+	spriteAnimFrame		3, Sprite_Sega_Logo_End	
 	
-	dc.b 	$FE ; End of animation
-	even
-	
+	spriteAnimEnd
+		
 ; ---------------------------------------------------------------------------
 
 loc_B4B6:
@@ -20204,7 +20181,7 @@ SpawnOpponentScrActors:
 ; ---------------------------------------------------------------------------
 
 .Spawned:
-	move.b	#$22,8(a1)
+	move.b	#$22,8(a1) ; Flash Portait
 	move.b	#1,9(a1)
 	move.w	#$F8,$A(a1)
 	move.w	#$D0,$E(a1)
@@ -22830,8 +22807,8 @@ loc_EE62:
 
 ; ---------------------------------------------------------------------------
 
-; DPLC - Cutscene (Opening & Ending) - Dr Robotnik	
-	include	"resources/mappings/DPLC/Cutscene (Opening & Ending) - Dr Robotnik.asm"
+; DPLC - Cutscene (Opening | Ending | Game Over) - Dr Robotnik	
+	include	"resources/mappings/DPLC/Cutscene (Opening) - Dr Robotnik.asm"
 	
 ; ---------------------------------------------------------------------------
 
@@ -26392,7 +26369,7 @@ locret_109AA:
 	rts
 ; ---------------------------------------------------------------------------
 
-loc_109AC:
+loc_109AC:	; Code to drop Has Bean while spinning
 	moveq	#$13,d0
 	bsr.w	sub_10DB2
 	lea	(loc_10AC8).l,a1
@@ -29634,7 +29611,7 @@ DrawActors:
 
 .StartDraw:
 	lea	sprite_buffer+8,a1
-	lea	SpriteMappings,a2
+	lea	Sprite_Mappings_Table,a2
 	lea	sprite_layers+1,a4
 
 	move.w	#(actors_end-actors)/aSize-1,d0
@@ -29848,11 +29825,11 @@ loc_11EE6:
 ; =============== S U B	R O U T	I N E =======================================
 
 
-sub_11EF2:
+sub_11EF2:	; Hints - Message
 	move.b	(level_mode).l,d2
 	or.b	(level).l,d2
 	or.b	$2A(a0),d2
-	bne.w	locret_11F48
+	bne.w	locret_11F48	; Disable to work on all stages
 	lea	(sub_11F4A).l,a1
 	jsr	(FindActorSlotQuick).l
 	bcs.w	locret_11F48
@@ -29907,11 +29884,11 @@ loc_11F9E:
 ; =============== S U B	R O U T	I N E =======================================
 
 
-sub_11FA4:
+sub_11FA4:	; Hints - Flashing Square
 	move.b	(level_mode).l,d2
 	or.b	(level).l,d2
 	or.b	$2A(a0),d2
-	bne.w	locret_11FFC
+	bne.w	locret_11FFC	; Disable to work on all stages
 	lea	(sub_12048).l,a1
 	jsr	(FindActorSlot).l
 	bcs.w	locret_11FFC
@@ -33211,694 +33188,108 @@ byte_13937:	dc.b 1
 ; Sprite Mappings Table
 ; ---------------------------------------------------------------------------
 
-SpriteMappings:	
-	dc.l Sprites_Puyo_Red
-	dc.l Sprites_Puyo_Yellow
-	dc.l Sprites_Send_Garbage
-	dc.l Sprites_Puyo_Green
-	dc.l Sprites_Puyo_Purple
-	dc.l Sprites_Puyo_Blue
-	dc.l Sprites_Stage
-	dc.l off_14814
-	dc.l off_19084
-	dc.l off_17748
-	dc.l off_178EA
-	dc.l off_17DFA
-	dc.l off_18048
-	dc.l off_17748
-	dc.l off_18916
-	dc.l off_17BF2
-	dc.l off_17748
-	dc.l off_18396
-	dc.l off_18608
-	dc.l off_184D6
-	dc.l Sprites_Cutscene_Scratch
-	dc.l off_17748
-	dc.l off_17748
-	dc.l off_1875A
-	dc.l off_18AE0
-	dc.l Sprites_Carbuncle
-	dc.l off_15CB0
-	dc.l off_15D04
-	dc.l off_14E00
-	dc.l off_166D4
-	dc.l off_14A70
-	dc.l off_14A00
-	dc.l off_14974
-	dc.l off_14876
-	dc.l off_14834
-	dc.l off_14834
-	dc.l off_13C00
-	dc.l off_1476C
-	dc.l off_14658
-	dc.l off_142AC
-	dc.l off_13B08
-	dc.l off_14F2A
-	dc.l off_13A44
-	dc.l Sprites_Cutscene_Robotnik
-	dc.l off_176D8
-	dc.l off_17AFE
-	dc.l off_182CA
-	dc.l off_1801E
-	dc.l off_182CA
-	dc.l off_191D0
-	dc.l Sprites_Sega_Logo
-	dc.l off_17748
-	dc.l off_17748
-	dc.l off_17748
-	dc.l off_17748
-	dc.l off_17748
-	dc.l off_17748
-	dc.l off_17748
-	dc.l off_17748
-	dc.l off_17748
-	dc.l off_17748
-	dc.l off_17748
-	dc.l off_17748
-	dc.l off_17748
-	dc.l off_19610
+Sprite_Mappings_Table:	
+
+Sprites_Puyo_Red:				dc.l ListSprites_Puyo_Red
+Sprites_Puyo_Yellow:			dc.l ListSprites_Puyo_Yellow
+Sprites_Garbage_Queue:			dc.l ListSprites_Garbage_Queue
+Sprites_Puyo_Green:				dc.l ListSprites_Puyo_Green
+Sprites_Puyo_Purple:			dc.l ListSprites_Puyo_Purple
+Sprites_Puyo_Blue:				dc.l ListSprites_Puyo_Blue
+Sprites_Stage:					dc.l ListSprites_Stage
+	dc.l off_14814 ; Staff Text Space
+Sprites_Cast:					dc.l ListSprites_Cast
+Sprites_Spare_1:				dc.l ListSprites_Spare					; Cutscene - Lesson 1 (Unused)
+Sprites_Cutscene_Frankly:		dc.l ListSprites_Cutscene_Frankly
+Sprites_Cutscene_Dynamight:		dc.l ListSprites_Cutscene_Dynamight
+Sprites_Cutscene_Arms:			dc.l ListSprites_Cutscene_Arms
+Sprites_Spare_2:				dc.l ListSprites_Spare					; Cutscene - Lesson 2 (Unused)
+Sprites_Cutscene_Grounder:		dc.l ListSprites_Cutscene_Grounder
+Sprites_Cutscene_Davy:			dc.l ListSprites_Cutscene_Davy
+Sprites_Cutscene_Coconuts:		dc.l ListSprites_Cutscene_Coconuts
+Sprites_Cutscene_Spike:			dc.l ListSprites_Cutscene_Spike
+Sprites_Cutscene_Ffuzzy:		dc.l ListSprites_Cutscene_Ffuzzy
+Sprites_Cutscene_Dragon:		dc.l ListSprites_Cutscene_Dragon
+Sprites_Cutscene_Scratch:		dc.l ListSprites_Cutscene_Scratch
+Sprites_Spare_3:				dc.l ListSprites_Spare					; Cutscene - Stage 13 (Unused)
+Sprites_Spare_4:				dc.l ListSprites_Spare					; Cutscene - Lesson 3 (Unused)
+Sprites_Cutscene_Humpty:		dc.l ListSprites_Cutscene_Humpty
+Sprites_Cutscene_Skweel:		dc.l ListSprites_Cutscene_Skweel
+Sprites_Carbuncle:				dc.l ListSprites_Carbuncle
+Sprites_Puyo_Big:				dc.l ListSprites_Puyo_Big
+Sprites_Game_Over_Robotnik:		dc.l ListSprites_Game_Over_Robotnik
+Sprites_Arcade_Text:			dc.l ListSprites_Arcade_Text			; Puyo Arcade (Unused)
+Sprites_Password:				dc.l ListSprites_Password
+Sprites_Credit_Numbers:			dc.l ListSprites_Credit_Numbers			; Puyo Arcade (Unused)
+Sprites_Game_Over_Letters:		dc.l ListSprites_Game_Over_Letters	
+Sprites_Cutscene_Text_Box:		dc.l ListSprites_Cutscene_Text_Box
+Sprites_Select_Level_Text:		dc.l ListSprites_Select_Level_Text
+Sprites_Flash_Portrait:			dc.l ListSprites_Flash_Portrait
+Sprites_Flash_Portrait_2:		dc.l ListSprites_Flash_Portrait			; Duplicate (Unused) 
+Sprites_Title:					dc.l ListSprites_Title
+Sprites_Puyo_Ghost:				dc.l ListSprites_Puyo_Ghost
+Sprites_Tutorial:				dc.l ListSprites_Tutorial
+Sprites_Mode_VS_2P:				dc.l ListSprites_Mode_VS_2P
+Sprites_Cutscene_Badniks:		dc.l ListSprites_Cutscene_Badniks
+Sprites_Stage_Game_Over:		dc.l ListSprites_Stage_Game_Over
+Sprites_Hints:					dc.l ListSprites_Hints
+Sprites_Cutscene_Robotnik:		dc.l ListSprites_Cutscene_Robotnik
+Sprites_Portrait_Frankly:		dc.l ListSprites_Portrait_Frankly
+Sprites_Portrait_Humpty:		dc.l ListSprites_Portrait_Humpty
+Sprites_Select_Level_Faces_1P:	dc.l ListSprites_Select_Level_Faces
+Sprites_Portrait_Ffuzzy:		dc.l ListSprites_Portrait_Ffuzzy
+Sprites_Select_Level_Faces_2P:	dc.l ListSprites_Select_Level_Faces
+Sprites_Ending:					dc.l ListSprites_Ending
+Sprites_Sega_Logo:				dc.l ListSprites_Sega_Logo
+Sprites_Spare_5:				dc.l ListSprites_Spare					; Portrait (Unused)
+Sprites_Spare_6:				dc.l ListSprites_Spare					; Portrait (Unused)
+Sprites_Spare_7:				dc.l ListSprites_Spare					; Portrait (Unused)
+Sprites_Spare_8:				dc.l ListSprites_Spare					; Portrait (Unused)
+Sprites_Spare_9:				dc.l ListSprites_Spare					; Portrait (Unused)
+Sprites_Spare_10:				dc.l ListSprites_Spare					; Portrait (Unused)
+Sprites_Spare_11:				dc.l ListSprites_Spare					; Portrait (Unused)
+Sprites_Spare_12:				dc.l ListSprites_Spare					; Portrait (Unused)
+Sprites_Spare_13:				dc.l ListSprites_Spare					; Portrait (Unused)
+Sprites_Spare_14:				dc.l ListSprites_Spare					; Portrait (Unused)
+Sprites_Spare_15:				dc.l ListSprites_Spare					; Portrait (Unused)
+Sprites_Spare_16:				dc.l ListSprites_Spare					; Portrait (Unused)
+Sprites_Spare_17:				dc.l ListSprites_Spare					; Portrait (Unused)
+Sprites_Misc:					dc.l ListSprites_Misc
+		
+; ---------------------------------------------------------------------------
+
+; Sprites - Hints
+	include	"resources/mappings/sprite/Hints.asm"	
+	
+; ---------------------------------------------------------------------------
+
+; Sprites - Cutscene - Badniks
+	include	"resources/mappings/sprite/Cutscene - Badniks.asm"	
+	
+; ---------------------------------------------------------------------------
+
+; Sprites - Title
+	include	"resources/mappings/sprite/Title.asm"	
+	
+; ---------------------------------------------------------------------------
+
+; Sprites - 1P VS 2P
+	include	"resources/mappings/sprite/1P VS 2P.asm"	
+	
+; ---------------------------------------------------------------------------
+
+; Sprites - Tutorial
+	include	"resources/mappings/sprite/Tutorial.asm"	
+	
+; ---------------------------------------------------------------------------	
+	
+; Sprites - Puyo Ghost
+	include	"resources/mappings/sprite/Puyo Ghost.asm"	
 	
 ; ---------------------------------------------------------------------------
 	
-off_13A44:	dc.l word_13A5C
-	dc.l word_13A6E
-	dc.l word_13A80
-	dc.l word_13A92
-	dc.l word_13AC4
-	dc.l word_13AF6
-word_13A5C:	dc.w 2
-	dc.w $FFF8, $101, $2318, $FFF8
-	dc.w $FFF8, $101, $2B18, 0
-word_13A6E:	dc.w 2
-	dc.w $FFF8, $101, $231A, $FFF8
-	dc.w $FFF8, $101, $2B1A, 0
-word_13A80:	dc.w 2
-	dc.w $FFF8, $101, $2328, $FFF8
-	dc.w $FFF8, $101, $2B28, 0
-word_13A92:	dc.w 6
-	dc.w 0,	$D00, $80, $FFD0
-	dc.w 0,	$D00, $88, $FFF0
-	dc.w 0,	$D00, $90, $10
-	dc.w $18, $D00,	$C0, $FFD4
-	dc.w $18, $D00,	$C8, $FFF4
-	dc.w $18, $D00,	$D0, $14
-word_13AC4:	dc.w 6
-	dc.w 0,	$D00, $80, $FFD0
-	dc.w 0,	$D00, $88, $FFF0
-	dc.w 0,	$500, $90, $10
-	dc.w $18, $D00,	$C0, $FFD0
-	dc.w $18, $D00,	$C8, $FFF0
-	dc.w $18, $D00,	$D0, $10
-word_13AF6:	dc.w 2
-	dc.w $FFF8, $103, $A318, $FFF8
-	dc.w $FFF8, $103, $AB18, 0
-off_13B08:	dc.l word_13B18
-	dc.l word_13B5A
-	dc.l word_13B9C
-	dc.l word_13BCE
-word_13B18:	dc.w 8
-	dc.w 0,	$A02, $C090, $18
-	dc.w 8,	$102, $C099, $10
-	dc.w $10, $302,	$C09B, $30
-	dc.w $18, 2, $C09F, $38
-	dc.w $18, $F02,	$C0A0, $10
-	dc.w $38, $802,	$C0B0, $18
-	dc.w $40, $802,	$C0B3, $10
-	dc.w $40, $402,	$C0B6, $28
-word_13B5A:	dc.w 8
-	dc.w 0,	$A02, $C0B8, $18
-	dc.w 8,	$102, $C099, $10
-	dc.w $10, $302,	$C09B, $30
-	dc.w $18, 2, $C09F, $38
-	dc.w $18, $F02,	$C0A0, $10
-	dc.w $38, $802,	$C0B0, $18
-	dc.w $40, $802,	$C0B3, $10
-	dc.w $40, $402,	$C0B6, $28
-word_13B9C:	dc.w 6
-	dc.w 0,	$E02, $A0C1, $10
-	dc.w 8,	2, $A0CD, 8
-	dc.w $10, $502,	$A0CE, 0
-	dc.w $18, $C02,	$A0D2, $10
-	dc.w $20, $502,	$A0D6, 8
-	dc.w $20, $902,	$A0DA, $18
-word_13BCE:	dc.w 6
-	dc.w 0,	$E02, $A0E0, $10
-	dc.w 8,	2, $A0EC, 8
-	dc.w $10, $502,	$A0CE, 0
-	dc.w $18, $802,	$A0ED, $10
-	dc.w $20, $502,	$A0D6, 8
-	dc.w $20, $902,	$A0DA, $18
-off_13C00:	dc.l word_13D28
-	dc.l word_13D32
-	dc.l word_13D3C
-	dc.l word_13D46
-	dc.l word_13D50
-	dc.l word_13D5A
-	dc.l word_13D64
-	dc.l word_13D76
-	dc.l word_13D80
-	dc.l word_13D8A
-	dc.l word_13D94
-	dc.l word_13D9E
-	dc.l word_13DA8
-	dc.l word_13DB2
-	dc.l word_13DBC
-	dc.l word_13DC6
-	dc.l word_13DD0
-	dc.l word_13DDA
-	dc.l word_13DE4
-	dc.l word_13DEE
-	dc.l word_13DF8
-	dc.l word_13E02
-	dc.l word_13E14
-	dc.l word_13E26
-	dc.l word_13E30
-	dc.l word_13E3A
-	dc.l word_13E44
-	dc.l word_13E4E
-	dc.l word_13E58
-	dc.l word_13E62
-	dc.l word_13E6C
-	dc.l word_13E76
-	dc.l word_13E88
-	dc.l word_13E92
-	dc.l word_13EAC
-	dc.l word_13ED6
-	dc.l word_13F00
-	dc.l word_13F12
-	dc.l word_13F1C
-	dc.l word_13F26
-	dc.l word_13F30
-	dc.l word_13F3A
-	dc.l word_13F44
-	dc.l word_13F4E
-	dc.l word_13F58
-	dc.l word_13F62
-	dc.l word_13F6C
-	dc.l word_13F76
-	dc.l word_13F80
-	dc.l word_13F8A
-	dc.l word_13F94
-	dc.l word_13F9E
-	dc.l word_13FB8
-	dc.l word_13FD2
-	dc.l word_13FDC
-	dc.l word_13FE6
-	dc.l word_13FF0
-	dc.l word_13FFA
-	dc.l word_14044
-	dc.l word_140A6
-	dc.l word_14108
-	dc.l word_14142
-	dc.l word_1418C
-	dc.l word_141CE
-	dc.l word_14208
-	dc.l word_14212
-	dc.l word_1421C
-	dc.l word_14226
-	dc.l word_14230
-	dc.l word_1423A
-	dc.l word_14244
-	dc.l word_1424E
-	dc.l word_14258
-	dc.l word_14262
-word_13D28:	dc.w 1
-	dc.w 0,	$A02, $423B, 0
-word_13D32:	dc.w 1
-	dc.w 0,	$A02, $4244, 0
-word_13D3C:	dc.w 1
-	dc.w 0,	$A02, $424D, 0
-word_13D46:	dc.w 1
-	dc.w 0,	$A02, $4256, 0
-word_13D50:	dc.w 1
-	dc.w 0,	$A02, $425F, 0
-word_13D5A:	dc.w 1
-	dc.w 0,	$A02, $4268, 0
-word_13D64:	dc.w 2
-	dc.w 0,	$602, $4271, 0
-	dc.w 8,	$102, $4277, $10
-word_13D76:	dc.w 1
-	dc.w 8,	$902, $4279, 0
-word_13D80:	dc.w 1
-	dc.w 0,	$A02, $427F, 0
-word_13D8A:	dc.w 1
-	dc.w 0,	$A02, $4288, 0
-word_13D94:	dc.w 1
-	dc.w 0,	$A02, $4291, 0
-word_13D9E:	dc.w 1
-	dc.w 0,	$A02, $429A, 0
-word_13DA8:	dc.w 1
-	dc.w 8,	$902, $42A3, 0
-word_13DB2:	dc.w 1
-	dc.w 8,	$902, $42A9, 0
-word_13DBC:	dc.w 1
-	dc.w 0,	$A02, $42AF, 0
-word_13DC6:	dc.w 1
-	dc.w 0,	$402, $22B8, 0
-word_13DD0:	dc.w 1
-	dc.w 0,	$502, $22BA, 0
-word_13DDA:	dc.w 1
-	dc.w 8,	2, $22BE, 0
-word_13DE4:	dc.w 1
-	dc.w 0,	$102, $22BF, 0
-word_13DEE:	dc.w 1
-	dc.w 0,	$102, $22C1, 0
-word_13DF8:	dc.w 1
-	dc.w 8,	2, $22C3, 0
-word_13E02:	dc.w 2
-	dc.w 0,	$A02, $42C4, 0
-	dc.w 8,	$102, $42CD, $18
-word_13E14:	dc.w 2
-	dc.w 0,	$A02, $42CF, 0
-	dc.w 8,	$102, $42D8, $18
-word_13E26:	dc.w 1
-	dc.w 0,	$A02, $42DA, 0
-word_13E30:	dc.w 1
-	dc.w 0,	$302, $2E3, 0
-word_13E3A:	dc.w 1
-	dc.w 0,	$302, $2E7, 0
-word_13E44:	dc.w 1
-	dc.w 0,	$302, $2EB, 0
-word_13E4E:	dc.w 1
-	dc.w 0,	$302, $2EF, 0
-word_13E58:	dc.w 1
-	dc.w 0,	$A02, $62F3, 0
-word_13E62:	dc.w 1
-	dc.w 0,	$A02, $62FC, 0
-word_13E6C:	dc.w 1
-	dc.w 0,	$A02, $6305, 0
-word_13E76:	dc.w 2
-	dc.w $10, $902,	$30E, 8
-	dc.w $18, 2, $314, 0
-word_13E88:	dc.w 1
-	dc.w $10, $D02,	$315, 0
-word_13E92:	dc.w 3
-	dc.w 8,	$C02, $31D, 0
-	dc.w $10, $902,	$321, 0
-	dc.w $18, 2, $31C, $18
-word_13EAC:	dc.w 5
-	dc.w 0,	$C02, $31D, 0
-	dc.w 8,	$802, $327, 0
-	dc.w $10, $502,	$32A, 8
-	dc.w $18, 2, $322, 0
-	dc.w $18, 2, $31C, $18
-word_13ED6:	dc.w 5
-	dc.w 0,	$502, $32E, $10
-	dc.w 8,	$402, $332, 0
-	dc.w $10, $502,	$334, 8
-	dc.w $18, 2, $322, 0
-	dc.w $18, 2, $31C, $18
-word_13F00:	dc.w 2
-	dc.w $10, $502,	$338, $10
-	dc.w $18, $402,	$33C, 0
-word_13F12:	dc.w 1
-	dc.w 8,	$902, $633E, 0
-word_13F1C:	dc.w 1
-	dc.w 8,	$902, $6344, 0
-word_13F26:	dc.w 1
-	dc.w 0,	$A02, $634A, 0
-word_13F30:	dc.w 1
-	dc.w 0,	2, $238D, 0
-word_13F3A:	dc.w 1
-	dc.w 0,	2, $238E, 0
-word_13F44:	dc.w 1
-	dc.w 0,	2, $238F, 0
-word_13F4E:	dc.w 1
-	dc.w 0,	2, $2390, 0
-word_13F58:	dc.w 1
-	dc.w 0,	2, $2B8D, 0
-word_13F62:	dc.w 1
-	dc.b 0,	0, 0, 2
-	dc.b $23, $91, 0, 0
-word_13F6C:	dc.w 1
-	dc.w 8,	2, $392, 0
-word_13F76:	dc.w 1
-	dc.w 0,	$102, $393, 0
-word_13F80:	dc.w 1
-	dc.w 0,	$502, $395, 0
-word_13F8A:	dc.w 1
-	dc.w 0,	$502, $399, 0
-word_13F94:	dc.w 1
-	dc.w 0,	$502, $39D, 0
-word_13F9E:	dc.w 3
-	dc.w 0,	$602, $3A1, 8
-	dc.w 8,	2, $3A7, 0
-	dc.w 8,	$102, $3A8, $18
-word_13FB8:	dc.w 3
-	dc.w 0,	$602, $3AA, 8
-	dc.w 8,	$102, $3B0, 0
-	dc.w 8,	$102, $3B2, $18
-word_13FD2:	dc.w 1
-	dc.w 0,	$E02, $3B4, 0
-word_13FDC:	dc.w 1
-	dc.w 8,	$902, $43C0, 0
-word_13FE6:	dc.w 1
-	dc.w 8,	$902, $43C6, 0
-word_13FF0:	dc.w 1
-	dc.w 0,	$A02, $43CC, 0
-word_13FFA:	dc.w 9
-	dc.w $18, $302,	$3D5, 8
-	dc.w $20, $302,	$3D9, 0
-	dc.w $28, $F02,	$3DD, $18
-	dc.w $30, $302,	$3ED, $10
-	dc.w $38, $202,	$3F1, 8
-	dc.w $40, $102,	$3F4, 0
-	dc.w $40, $202,	$3F6, $38
-	dc.w $48, $D02,	$3F9, $18
-	dc.w $50, 2, $401, $10
-word_14044:	dc.w $C
-	dc.w $18, $302,	$402, 8
-	dc.w $20, $302,	$406, 0
-	dc.w $20, $B02,	$40A, $18
-	dc.w $28, $302,	$416, $10
-	dc.w $28, $302,	$41A, $30
-	dc.w $30, $202,	$41E, $38
-	dc.w $38, $102,	$421, 8
-	dc.w $38, 2, $423, $40
-	dc.w $40, $102,	$424, 0
-	dc.w $40, $902,	$426, $18
-	dc.w $48, 2, $42C, $10
-	dc.w $48, 2, $42D, $30
-word_140A6:	dc.w $C
-	dc.w $10, $702,	$42E, $18
-	dc.w $18, $702,	$436, 8
-	dc.w $18, $302,	$43E, $28
-	dc.w $20, $302,	$442, 0
-	dc.w $20, $702,	$446, $30
-	dc.w $28, $102,	$44E, $40
-	dc.w $30, $602,	$450, $18
-	dc.w $38, $402,	$456, 8
-	dc.w $38, $102,	$458, $28
-	dc.w $40, $102,	$424, 0
-	dc.w $40, 2, $45A, $10
-	dc.w $40, 2, $44D, $30
-word_14108:	dc.w 7
-	dc.w 0,	$B02, $45B, $20
-	dc.w 8,	$F02, $467, 0
-	dc.w $20, $802,	$477, $20
-	dc.w $28, $D02,	$47A, 0
-	dc.w $28, 2, $482, $20
-	dc.w $38, $402,	$483, 0
-	dc.w $40, $102,	$424, 0
-word_14142:	dc.w 9
-	dc.w 0,	$B02, $485, $20
-	dc.w 8,	$B02, $467, 0
-	dc.w $10, $302,	$491, $18
-	dc.w $20, $802,	$495, $20
-	dc.w $28, $902,	$47A, 0
-	dc.w $28, 2, $482, $20
-	dc.w $30, 2, $481, $18
-	dc.w $38, $402,	$483, 0
-	dc.w $40, $102,	$424, 0
-word_1418C:	dc.w 8
-	dc.w 8,	$B02, $467, 0
-	dc.w 8,	$B02, $498, $20
-	dc.w $10, $302,	$491, $18
-	dc.w $28, $902,	$47A, 0
-	dc.w $28, 2, $482, $20
-	dc.w $30, 2, $481, $18
-	dc.w $38, $402,	$483, 0
-	dc.w $40, $102,	$424, 0
-word_141CE:	dc.w 7
-	dc.w 0,	$F01, $4A4, $18
-	dc.w 8,	$B01, $467, 0
-	dc.w $20, $C01,	$476, $18
-	dc.w $28, $D01,	$47A, 0
-	dc.w $28, 1, $482, $20
-	dc.w $38, $401,	$483, 0
-	dc.w $40, $101,	$424, 0
-word_14208:	dc.w 1
-	dc.w $FFFC, 1, $44B4, $FFFC
-word_14212:	dc.w 1
-	dc.w $FFFC, 1, $44B5, $FFFC
-word_1421C:	dc.w 1
-	dc.w $FFFC, 1, $4CB4, $FFFC
-word_14226:	dc.w 1
-	dc.w $FFFC, 1, $4CB5, $FFFC
-word_14230:	dc.w 1
-	dc.w $FFFC, 1, $54B4, $FFFC
-word_1423A:	dc.w 1
-	dc.w $FFFC, 1, $54B5, $FFFC
-word_14244:	dc.w 1
-	dc.w $FFFC, 1, $5CB4, $FFFC
-word_1424E:	dc.w 1
-	dc.w $FFFC, 1, $5CB5, $FFFC
-word_14258:	dc.w 1
-	dc.w 0,	$402, $4B6, 0
-word_14262:	dc.w 9
-	dc.w 0,	$B03, $6353, $50
-	dc.w 8,	$303, $635F, $48
-	dc.w 8,	$103, $6363, $68
-	dc.w $10, $703,	$6365, $30
-	dc.w $18, $D03,	$636D, 0
-	dc.w $18, $703,	$6375, $20
-	dc.w $18, $103,	$637D, $40
-	dc.w $28, $B03,	$637F, 8
-	dc.w $38, $103,	$638B, $20
-off_142AC:	dc.l word_144E4
-	dc.l word_1453E
-	dc.l word_145A8
-	dc.l word_145C2
-	dc.l word_145CC
-	dc.l word_145D6
-	dc.l word_145E0
-	dc.l word_145EA
-	dc.l word_145F4
-	dc.l word_145FE
-	dc.l word_14608
-	dc.l word_14612
-	dc.l word_1461C
-	dc.l word_14626
-	dc.l word_14630
-	dc.l word_1463A
-	dc.l word_14644
-	dc.l word_1464E
-	dc.l word_14344
-	dc.l word_1434E
-	dc.l word_14358
-	dc.l word_14362
-	dc.l word_1436C
-	dc.l word_14376
-	dc.l word_143E8
-	dc.l word_14452
-	dc.l word_1445C
-	dc.l word_14466
-	dc.l word_14470
-	dc.l word_1447A
-	dc.l word_14484
-	dc.l word_1448E
-	dc.l word_14498
-	dc.l word_144A2
-	dc.l word_144B4
-	dc.l word_144BE
-	dc.l word_144C8
-	dc.l word_144D2
-word_14344:	dc.w 1
-	dc.w 0,	$502, $8142, 0
-word_1434E:	dc.w 1
-	dc.w 0,	$502, $8146, 0
-word_14358:	dc.w 1
-	dc.w 0,	$502, $814A, 0
-word_14362:	dc.w 1
-	dc.w 0,	$501, $814E, 0
-word_1436C:	dc.w 1
-	dc.w 0,	$501, $8152, 0
-word_14376:	dc.w $E
-	dc.w 0,	$B02, $E156, $20
-	dc.w 8,	$B02, $E19F, 8
-	dc.w 8,	$302, $E16E, $38
-	dc.w $10, $302,	$E1AB, 0
-	dc.w $10, $302,	$E1AF, $40
-	dc.w $10, $302,	$E1B3, $50
-	dc.w $18, $302,	$E1B7, $48
-	dc.w $18, $202,	$E1BB, $58
-	dc.w $20, $B02,	$E1BE, $20
-	dc.w $28, $902,	$E1CA, 8
-	dc.w $28, $202,	$E19A, $38
-	dc.w $30, $102,	$E1D0, $40
-	dc.w $30, 2, $E1D2, $50
-	dc.w $38, 2, $E193, $48
-word_143E8:	dc.w $D
-	dc.w 0,	$B02, $E156, $20
-	dc.w 8,	$B02, $E162, 8
-	dc.w 8,	$302, $E16E, $38
-	dc.w $10, $302,	$E1D3, 0
-	dc.w $10, $802,	$E1D7, $40
-	dc.w $18, $302,	$E17A, $40
-	dc.w $18, $602,	$E1DA, $50
-	dc.w $20, $B02,	$E184, $20
-	dc.w $20, $302,	$E190, $48
-	dc.w $28, $902,	$E1E0, 8
-	dc.w $28, $202,	$E19A, $38
-	dc.w $30, 2, $E19D, $50
-	dc.w $38, 2, $E19E, $40
-word_14452:	dc.w 1
-	dc.w 0,	$502, $E1E6, 0
-word_1445C:	dc.w 1
-	dc.w 0,	$502, $E1EA, 0
-word_14466:	dc.w 1
-	dc.w 0,	$502, $E1EE, 0
-word_14470:	dc.w 1
-	dc.w 0,	$502, $E1F2, 0
-word_1447A:	dc.w 1
-	dc.w 0,	$502, $E1F6, 0
-word_14484:	dc.w 1
-	dc.w 0,	$501, $E1FA, 0
-word_1448E:	dc.w 1
-	dc.w 0,	$501, $E1FE, 0
-word_14498:	dc.w 1
-	dc.w 0,	$501, $E202, 0
-word_144A2:	dc.w 2
-	dc.w 0,	$401, $E206, 0
-	dc.w 8,	1, $E208, 0
-word_144B4:	dc.w 1
-	dc.w 0,	$501, $F1FA, 0
-word_144BE:	dc.w 1
-	dc.w 0,	$501, $F1FE, 0
-word_144C8:	dc.w 1
-	dc.w 0,	$501, $F202, 0
-word_144D2:	dc.w 2
-	dc.w 8,	$401, $F206, 0
-	dc.w 0,	1, $F208, 0
-word_144E4:	dc.w $B
-	dc.w 0,	$B02, $8100, $18
-	dc.w 8,	$702, $810C, 8
-	dc.w 8,	$302, $8114, $30
-	dc.w 8,	$E02, $8118, $40
-	dc.w $10, $202,	$8124, 0
-	dc.w $10, $302,	$8127, $38
-	dc.w $20, $A02,	$812B, $18
-	dc.w $20, $502,	$8134, $40
-	dc.w $28, $602,	$8138, 8
-	dc.w $28, $102,	$813E, $30
-	dc.w $38, $402,	$8140, $18
-word_1453E:	dc.w $D
-	dc.w 0,	$B02, $E156, $20
-	dc.w 8,	$B02, $E162, 8
-	dc.w 8,	$302, $E16E, $38
-	dc.w $10, $302,	$E172, 0
-	dc.w $10, $C02,	$E176, $40
-	dc.w $18, $302,	$E17A, $40
-	dc.w $18, $602,	$E17E, $50
-	dc.w $20, $B02,	$E184, $20
-	dc.w $20, $302,	$E190, $48
-	dc.w $28, $902,	$E194, 8
-	dc.w $28, $202,	$E19A, $38
-	dc.w $30, 2, $E19D, $50
-	dc.w $38, 2, $E19E, $40
-word_145A8:	dc.w 3
-	dc.w 0,	$E01, $8254, $FFE4
-	dc.w 0,	$E01, $8260, 4
-	dc.w 0,	$601, $826C, $24
-word_145C2:	dc.w 1
-	dc.w $FFFC, 3, $82E2, $FFFC
-word_145CC:	dc.w 1
-	dc.w $FFFC, 3, $82E3, $FFFC
-word_145D6:	dc.w 1
-	dc.w $FFFC, 3, $82E4, $FFFC
-word_145E0:	dc.w 1
-	dc.w $FFFC, 3, $82E5, $FFFC
-word_145EA:	dc.w 1
-	dc.w $FFFC, 3, $82E6, $FFFC
-word_145F4:	dc.w 1
-	dc.w $FFFC, 3, $82E7, $FFFC
-word_145FE:	dc.w 1
-	dc.w $FFFC, 3, $82E8, $FFFC
-word_14608:	dc.w 1
-	dc.w $FFFC, 3, $82E9, $FFFC
-word_14612:	dc.w 1
-	dc.w $FFFC, 3, $82EA, $FFFC
-word_1461C:	dc.w 1
-	dc.w $FFFC, 3, $82EB, $FFFC
-word_14626:	dc.w 1
-	dc.w $FFFC, 3, $82EC, $FFFC
-word_14630:	dc.w 1
-	dc.w $FFFC, 3, $82ED, $FFFC
-word_1463A:	dc.w 1
-	dc.w $FFFC, 3, $82EE, $FFFC
-word_14644:	dc.w 1
-	dc.w $FFFC, 3, $82EF, $FFFC
-word_1464E:	dc.w 1
-	dc.w $FFFC, 3, $82F0, $FFFC
-off_14658:	dc.l word_14670
-	dc.l word_1468A
-	dc.l word_146A4
-	dc.l word_146D6
-	dc.l word_14708
-	dc.l word_1473A
-word_14670:	dc.w 3
-	dc.w $FFE4, $600, $A4C0, $FFF0
-	dc.w $FFE4, $600, $ACC0, 0
-	dc.w $FFD8, $400, $E4CC, $FFF8
-word_1468A:	dc.w 3
-	dc.w $FFE4, $600, $A4C6, $FFF0
-	dc.w $FFE4, $600, $ACC6, 0
-	dc.w $FFD8, $400, $E4CE, $FFF8
-word_146A4:	dc.w 6
-	dc.w $FFE3, $503, $E4FC, $FFF8
-	dc.w $FFF0, $502, $E4F4, $FFF8
-	dc.w $FFE4, $502, $E4EC, $FFE8
-	dc.w $FFE4, $502, $ECEC, 8
-	dc.w $FFDC, $201, $E4E6, $FFFC
-	dc.w $FFC5, $F00, $E4D0, $FFF0
-word_146D6:	dc.w 6
-	dc.w $FFE3, $503, $E4FC, $FFF8
-	dc.w $FFF0, $502, $E4F4, $FFF8
-	dc.w $FFE4, $502, $E4F0, $FFE8
-	dc.w $FFE4, $502, $ECEC, 8
-	dc.w $FFDC, $601, $E4E0, $FFF8
-	dc.w $FFC5, $F00, $E4D0, $FFE8
-word_14708:	dc.w 6
-	dc.w $FFE3, $503, $E4FC, $FFF8
-	dc.w $FFF0, $502, $E4F8, $FFF8
-	dc.w $FFE4, $502, $E4EC, $FFE8
-	dc.w $FFE4, $502, $ECEC, 8
-	dc.w $FFDC, $201, $E4E9, $FFFC
-	dc.w $FFC9, $F00, $E4D0, $FFF0
-word_1473A:	dc.w 6
-	dc.w $FFE3, $503, $E4FC, $FFF8
-	dc.w $FFF0, $502, $E4F4, $FFF8
-	dc.w $FFE4, $502, $E4EC, $FFE8
-	dc.w $FFE4, $502, $ECF0, 8
-	dc.w $FFDC, $601, $ECE0, $FFF8
-	dc.w $FFC7, $F00, $E4D0, $FFF8
-off_1476C:	dc.l word_1479C
-	dc.l word_147BA
-	dc.l word_147D8
-	dc.l word_147F6
-	dc.l word_147A6
-	dc.l word_147C4
-	dc.l word_147E2
-	dc.l word_14800
-	dc.l word_147B0
-	dc.l word_147CE
-	dc.l word_147EC
-	dc.l word_1480A
-word_1479C:	dc.w 1
-	dc.w $FFF8, $502, $831C, $FFF8
-word_147A6:	dc.w 1
-	dc.w $FFFC, 2, $8324, $FFFC
-word_147B0:	dc.w 1
-	dc.w $FFFC, 2, $8326, $FFFC
-word_147BA:	dc.w 1
-	dc.w $FFF8, $502, $8320, $FFF8
-word_147C4:	dc.w 1
-	dc.w $FFFC, 2, $8325, $FFFC
-word_147CE:	dc.w 1
-	dc.w $FFFC, 2, $8327, $FFFC
-word_147D8:	dc.w 1
-	dc.w $FFF8, $502, $A31C, $FFF8
-word_147E2:	dc.w 1
-	dc.w $FFFC, 2, $A324, $FFFC
-word_147EC:	dc.w 1
-	dc.w $FFFC, 2, $A326, $FFFC
-word_147F6:	dc.w 1
-	dc.w $FFF8, $502, $A320, $FFF8
-word_14800:	dc.w 1
-	dc.w $FFFC, 2, $A325, $FFFC
-word_1480A:	dc.w 1
-	dc.w $FFFC, 2, $A327, $FFFC
-off_14814:	dc.l byte_FF1446
+off_14814:	
+	dc.l byte_FF1446
 	dc.l byte_FF14E8
 	dc.l byte_FF158A
 	dc.l byte_FF162C
@@ -33906,343 +33297,47 @@ off_14814:	dc.l byte_FF1446
 	dc.l byte_FF1770
 	dc.l byte_FF1812
 	dc.l byte_FF18B4
-off_14834:	dc.l word_14844
-	dc.l word_14844
-	dc.l word_14844
-	dc.l word_14844
-word_14844:	dc.w 6
-	dc.w 0,	$F00, $E4F0, 0
-	dc.w 0,	$F00, $E4F0, $20
-	dc.w 0,	$700, $E4F0, $40
-	dc.w $20, $E00,	$E4F0, 0
-	dc.w $20, $E00,	$E4F0, $20
-	dc.w $20, $600,	$E4F0, $40
-off_14876:	dc.l word_1488A
-	dc.l word_148C4
-	dc.l word_148E6
-	dc.l word_14918
-	dc.l word_1493A
-word_1488A:	dc.w 7
-	dc.w $FFF8, $102, $8588, $FFE4
-	dc.w $FFF8, $102, $8580, $FFEC
-	dc.w $FFF8, $102, $85A4, $FFF4
-	dc.w $FFF8, $102, $8590, $FFFC
-	dc.w $FFF8, $102, $8588, 4
-	dc.w $FFF8, $102, $85A4, $C
-	dc.w $FFF8, $102, $85A6, $14
-word_148C4:	dc.w 4
-	dc.w $FFF8, $102, $8588, $FFF0
-	dc.w $FFF8, $102, $8580, $FFF8
-	dc.w $FFF8, $102, $85A4, 0
-	dc.w $FFF8, $102, $85B0, 8
-word_148E6:	dc.w 6
-	dc.w $FFF8, $102, $859A, $FFE8
-	dc.w $FFF8, $102, $859C, $FFF0
-	dc.w $FFF8, $102, $85A2, $FFF8
-	dc.w $FFF8, $102, $8598, 0
-	dc.w $FFF8, $102, $8580, 8
-	dc.w $FFF8, $102, $8596, $10
-word_14918:	dc.w 4
-	dc.w $FFF8, $102, $858E, $FFF0
-	dc.w $FFF8, $102, $8580, $FFF8
-	dc.w $FFF8, $102, $85A2, 0
-	dc.w $FFF8, $102, $8586, 8
-word_1493A:	dc.w 7
-	dc.w $FFF8, $102, $858E, $FFE4
-	dc.w $FFF8, $102, $8580, $FFEC
-	dc.w $FFF8, $102, $85A2, $FFF4
-	dc.w $FFF8, $102, $8586, $FFFC
-	dc.w $FFF8, $102, $8588, 4
-	dc.w $FFF8, $102, $85A4, $C
-	dc.w $FFF8, $102, $85A6, $14
-off_14974:	dc.l word_1499C
-	dc.l word_149A6
-	dc.l word_149B0
-	dc.l word_149BA
-	dc.l word_149C4
-	dc.l word_149CE
-	dc.l word_149D8
-	dc.l word_149E2
-	dc.l word_149EC
-	dc.l word_149F6
-word_1499C:	dc.w 1
-	dc.w 0,	0, $E3F7, 0
-word_149A6:	dc.w 1
-	dc.w 0,	0, $E3F9, 0
-word_149B0:	dc.w 1
-	dc.w 0,	0, $E3FD, 0
-word_149BA:	dc.w 1
-	dc.w 0,	0, $E3FF, 0
-word_149C4:	dc.w 1
-	dc.w 0,	$100, $E3F5, 0
-word_149CE:	dc.w 1
-	dc.w 0,	1, $E1F7, 0
-word_149D8:	dc.w 1
-	dc.w 0,	1, $E1F9, 0
-word_149E2:	dc.w 1
-	dc.w 0,	1, $E1FD, 0
-word_149EC:	dc.w 1
-	dc.w 0,	1, $E1FF, 0
-word_149F6:	dc.w 1
-	dc.w 0,	$100, $E1F5, 0
-off_14A00:	dc.l word_14A20
-	dc.l word_14A2A
-	dc.l word_14A34
-	dc.l word_14A3E
-	dc.l word_14A48
-	dc.l word_14A52
-	dc.l word_14A5C
-	dc.l word_14A66
-word_14A20:	dc.w 1
-	dc.w $FFF0, $A00, $E252, $FFF4
-word_14A2A:	dc.w 1
-	dc.w $FFF0, $A01, $E25B, $FFF4
-word_14A34:	dc.w 1
-	dc.w $FFF0, $A02, $E264, $FFF4
-word_14A3E:	dc.w 1
-	dc.w $FFF0, $A03, $E26D, $FFF4
-word_14A48:	dc.w 1
-	dc.w $FFF0, $A00, $E276, $FFF4
-word_14A52:	dc.w 1
-	dc.w $FFF0, $A01, $E27F, $FFF4
-word_14A5C:	dc.w 1
-	dc.w $FFF0, $A02, $E26D, $FFF4
-word_14A66:	dc.w 1
-	dc.w $FFF0, $A03, $E288, $FFF4
-off_14A70:	dc.l word_14A98
-	dc.l word_14AA2
-	dc.l word_14AAC
-	dc.l word_14AB6
-	dc.l word_14AC0
-	dc.l word_14ACA
-	dc.l word_14AD4
-	dc.l word_14ADE
-	dc.l word_14AE8
-	dc.l word_14AF2
-word_14A98:	dc.w 1
-	dc.w $FFFC, $100, $856C, 0
-word_14AA2:	dc.w 1
-	dc.w $FFFC, $100, $856E, 0
-word_14AAC:	dc.w 1
-	dc.w $FFFC, $100, $8570, 0
-word_14AB6:	dc.w 1
-	dc.w $FFFC, $100, $8572, 0
-word_14AC0:	dc.w 1
-	dc.w $FFFC, $100, $8574, 0
-word_14ACA:	dc.w 1
-	dc.w $FFFC, $100, $8576, 0
-word_14AD4:	dc.w 1
-	dc.w $FFFC, $100, $8578, 0
-word_14ADE:	dc.w 1
-	dc.w $FFFC, $100, $857A, 0
-word_14AE8:	dc.w 1
-	dc.w $FFFC, $100, $857C, 0
-word_14AF2:	dc.w 1
-	dc.w $FFFC, $100, $857E, 0
-	dc.l word_14BB4
-	dc.l word_14BB4
-	dc.l word_14BB4
-	dc.l word_14BB4
-	dc.l word_14BB4
-	dc.l word_14BD6
-	dc.l word_14BF8
-	dc.l word_14BF8
-	dc.l word_14BF8
-	dc.l word_14BF8
-	dc.l word_14BF8
-	dc.l word_14BF8
-	dc.l word_14BF8
-	dc.l word_14BF8
-	dc.l word_14BF8
-	dc.l word_14BF8
-	dc.l word_14BF8
-	dc.l word_14BF8
-	dc.l word_14BF8
-	dc.l word_14C22
-	dc.l word_14C44
-	dc.l word_14C44
-	dc.l word_14C44
-	dc.l word_14C44
-	dc.l word_14C44
-	dc.l word_14C66
-	dc.l word_14C70
-	dc.l word_14C7A
-	dc.l word_14C84
-	dc.l word_14C96
-	dc.l word_14CA8
-	dc.l word_14CC2
-	dc.l word_14CDC
-	dc.l word_14CF6
-	dc.l word_14D10
-	dc.l word_14D22
-	dc.l word_14D3C
-	dc.l word_14D4E
-	dc.l word_14D68
-	dc.l word_14D82
-	dc.l word_14D9C
-	dc.l word_14DB6
-	dc.l word_14DD0
-	dc.l word_14DDA
-	dc.l word_14DE4
-	dc.l word_14DEE
-word_14BB4:	dc.w 4
-	dc.w $FFC8, $F02, $8300, $FFE8
-	dc.w $FFC8, $302, $8310, 8
-	dc.w $FFE8, $E02, $8314, $FFE8
-	dc.w $FFE8, $202, $8320, 8
-word_14BD6:	dc.w 4
-	dc.w $FFC8, $B02, $8323, $FFD8
-	dc.w $FFC8, $B02, $832F, $FFF0
-	dc.w $FFE8, 2, $833B, $FFE8
-	dc.w $FFE8, $E02, $833C, $FFF0
-word_14BF8:	dc.w 5
-	dc.w $FFC8, $E02, $83A6, $FFE0
-	dc.w $FFC8, $202, $83B2, 0
-	dc.w $FFE0, $202, $83B5, $FFE0
-	dc.w $FFF8, $802, $83C4, $FFE0
-	dc.w $FFF0, $902, $83C7, $FFF8
-word_14C22:	dc.w 4
-	dc.w $FFC8, $F02, $836B, $FFE0
-	dc.w $FFC8, $702, $837B, 0
-	dc.w $FFE8, $E02, $8383, $FFE0
-	dc.w $FFE8, $602, $838F, 0
-word_14C44:	dc.w 4
-	dc.w $FFC8, $F02, $8348, $FFE8
-	dc.w $FFC8, $702, $8358, 8
-	dc.w $FFE8, $D02, $8360, $FFF0
-	dc.w $FFF8, $802, $8368, $FFF0
-word_14C66:	dc.w 1
-	dc.w $FFD8, $101, $8397, 0
-word_14C70:	dc.w 1
-	dc.w $FFD8, $401, $8399, $FFF8
-word_14C7A:	dc.w 1
-	dc.w $FFD8, $401, $839B, $FFF8
-word_14C84:	dc.w 2
-	dc.w $FFD8, $100, $8395, 0
-	dc.w $FFD8, 1, $839B, $FFF8
-word_14C96:	dc.w 2
-	dc.w $FFE0, $602, $83B8, $FFE8
-	dc.w $FFE0, $902, $83BE, $FFF8
-word_14CA8:	dc.w 3
-	dc.w $FFE0, 1, $83F2, $FFF8
-	dc.w $FFE0, $602, $83B8, $FFE8
-	dc.w $FFE0, $902, $83BE, $FFF8
-word_14CC2:	dc.w 3
-	dc.w $FFD8, $401, $83E3, $FFF0
-	dc.w $FFE0, $602, $83B8, $FFE8
-	dc.w $FFE0, $902, $83BE, $FFF8
-word_14CDC:	dc.w 3
-	dc.w $FFD8, $901, $83D7, $FFF0
-	dc.w $FFE0, $602, $83B8, $FFE8
-	dc.w $FFE0, $902, $83BE, $FFF8
-word_14CF6:	dc.w 3
-	dc.w $FFD8, $901, $83DD, $FFF0
-	dc.w $FFE0, $602, $83B8, $FFE8
-	dc.w $FFE0, $902, $83BE, $FFF8
-word_14D10:	dc.w 2
-	dc.w $FFE0, $602, $83B8, $FFE8
-	dc.w $FFE0, $902, $83EB, $FFF8
-word_14D22:	dc.w 3
-	dc.w $FFE0, $602, $83B8, $FFE8
-	dc.w $FFE0, $902, $83EB, $FFF8
-	dc.w $FFE0, 1, $83F1, $FFF8
-word_14D3C:	dc.w 2
-	dc.w $FFE0, $602, $83B8, $FFE8
-	dc.w $FFE0, $902, $83E5, $FFF8
-word_14D4E:	dc.w 3
-	dc.w $FFE0, $602, $83B8, $FFE8
-	dc.w $FFE0, $902, $83E5, $FFF8
-	dc.w $FFE0, 1, $83F1, $FFF8
-word_14D68:	dc.w 3
-	dc.w $FFE0, $602, $83B8, $FFE8
-	dc.w $FFE0, $902, $83EB, $FFF8
-	dc.w $FFD8, $401, $83E3, $FFF0
-word_14D82:	dc.w 3
-	dc.w $FFE0, $602, $83B8, $FFE8
-	dc.w $FFE0, $902, $83E5, $FFF8
-	dc.w $FFD8, $401, $83E3, $FFF0
-word_14D9C:	dc.w 3
-	dc.w $FFE0, $602, $83B8, $FFE8
-	dc.w $FFE0, $902, $83EB, $FFF8
-	dc.w $FFD8, $501, $83CD, $FFF0
-word_14DB6:	dc.w 3
-	dc.w $FFE0, $602, $83D1, $FFE8
-	dc.w $FFE0, $902, $83EB, $FFF8
-	dc.w $FFD8, $501, $83CD, $FFF0
-word_14DD0:	dc.w 1
-	dc.w $FFD8, $101, $83A3, 0
-word_14DDA:	dc.w 1
-	dc.w $FFD8, $801, $83A0, $FFF8
-word_14DE4:	dc.w 1
-	dc.w $FFD8, $801, $839D, $FFF8
-word_14DEE:	dc.w 2
-	dc.w $FFD8, $101, $83A3, 0
-	dc.w $FFD8, 0, $83A5, 0
-off_14E00:	dc.l word_14E96
-	dc.l word_14EF0
-	dc.l word_14E30
-	dc.l word_14E42
-	dc.l word_14E54
-	dc.l word_14E1C
-	dc.l word_14E26
-word_14E1C:	dc.w 1
-	dc.w $FFF8, 0, $C560, $FFF8
-word_14E26:	dc.w 1
-	dc.w $FFF8, 0, $AD60, $FFF8
-word_14E30:	dc.w 2
-	dc.w 1,	$C00, $85BA, 4
-	dc.w 1,	0, $85BE, $24
-word_14E42:	dc.w 2
-	dc.w 1,	$C00, $85BA, 0
-	dc.w 1,	0, $85BF, $20
-word_14E54:	dc.w 8
-	dc.w $FFFC, $100, $858A, $FFE8
-	dc.w $FFFC, $100, $85A2, $FFF0
-	dc.w $FFFC, $100, $8588, $FFF8
-	dc.w $FFFC, $100, $8588, 0
-	dc.w $FFFC, $100, $859E, $C
-	dc.w $FFFC, $100, $8596, $14
-	dc.w $FFFC, $100, $8580, $1C
-	dc.w $FFFC, $100, $85B0, $24
-word_14E96:	dc.w $B
-	dc.w $FFFC, $100, $8590, 0
-	dc.w $FFFC, $100, $859A, 8
-	dc.w $FFFC, $100, $85A4, $10
-	dc.w $FFFC, $100, $8588, $18
-	dc.w $FFFC, $100, $85A2, $20
-	dc.w $FFFC, $100, $85A6, $28
-	dc.w $FFFC, $100, $8584, $34
-	dc.w $FFFC, $100, $859C, $3C
-	dc.w $FFFC, $100, $8590, $44
-	dc.w $FFFC, $100, $859A, $4C
-	dc.w 0,	$400, $85B8, $54
-word_14EF0:	dc.w 7
-	dc.w $FFF8, $100, $8524, $FFE0
-	dc.w $FFF8, $100, $853E, $FFE8
-	dc.w $FFF8, $100, $8538, $FFF0
-	dc.w $FFF8, $100, $8538, $FFF8
-	dc.w $FFF8, $100, $8546, 0
-	dc.w $FFF8, $100, $853E, $10
-	dc.w $FFF8, $100, $8534, $18
-off_14F2A:	dc.l word_14F36
-	dc.l word_14F78
-	dc.l word_14F8A
-word_14F36:	dc.w 8
-	dc.w $FFF8, $100, $A522, $FFDC
-	dc.w $FFF8, $100, $A516, $FFE4
-	dc.w $FFF8, $100, $A52E, $FFEC
-	dc.w $FFF8, $100, $A51E, $FFF4
-	dc.w $FFF8, $100, $A532, 4
-	dc.w $FFF8, $100, $A540, $C
-	dc.w $FFF8, $100, $A51E, $14
-	dc.w $FFF8, $100, $A538, $1C
-word_14F78:	dc.w 2
-	dc.w $FFF8, $D00, $A54C, $FFDC
-	dc.w $FFF8, $D00, $A554, 4
-word_14F8A:	dc.w 2
-	dc.w $FFF8, $D00, $A55C, $FFDC
-	dc.w $FFF8, $D00, $A564, 4
+	
+; ---------------------------------------------------------------------------	
+	
+; Sprites - Next Opponent - Flash Portait
+	include	"resources/mappings/sprite/Next Opponent - Flash Portrait.asm"	
+	
+; ---------------------------------------------------------------------------
 
+; Sprites - Select Level - Text
+	include	"resources/mappings/sprite/Select Level - Text.asm"	
+	
+; ---------------------------------------------------------------------------	
+
+; Sprites - Cutscene - Text Box
+	include	"resources/mappings/sprite/Cutscene - Text Box.asm"	
+	
+; ---------------------------------------------------------------------------	
+
+; Sprites - Game Over - Letters
+	include	"resources/mappings/sprite/Game Over - Letters.asm"	
+	
+; ---------------------------------------------------------------------------	
+
+; Sprites - Credits - Numbers
+	include	"resources/mappings/sprite/Credits - Numbers.asm"	
+	
+; ---------------------------------------------------------------------------
+	
+; Sprites - Cutscene - Arle Nadja
+	include	"resources/mappings/sprite/puyo1/Cutscene - Arle Nadja.asm"	
+
+; ---------------------------------------------------------------------------
+
+; Sprites - Arcade - Text
+	include	"resources/mappings/sprite/Arcade - Text.asm"	
+		
+; ---------------------------------------------------------------------------
+
+; Sprites - Stage - Game Over
+	include	"resources/mappings/sprite/Stage - Game Over.asm"	
+	
 ; ---------------------------------------------------------------------------
 
 ; Sprites - Puyo Red
@@ -34255,8 +33350,8 @@ word_14F8A:	dc.w 2
 	
 ; ---------------------------------------------------------------------------
 		
-; Sprites - Send Garabage
-	include	"resources/mappings/sprite/Send Garbage.asm"
+; Sprites - Garbage Queue
+	include	"resources/mappings/sprite/Garbage Queue.asm"
 	
 ; ---------------------------------------------------------------------------
 	
@@ -34285,439 +33380,19 @@ word_14F8A:	dc.w 2
 	
 ; ---------------------------------------------------------------------------
 
-off_15CB0:	dc.l word_15CC8
-	dc.l word_15CD2
-	dc.l word_15CDC
-	dc.l word_15CE6
-	dc.l word_15CF0
-	dc.l word_15CFA
-word_15CC8:	dc.w 1
-	dc.w $FFF0, $E01, $C438, $FFF0
-word_15CD2:	dc.w 1
-	dc.w $FFF0, $E01, $C444, $FFF0
-word_15CDC:	dc.w 1
-	dc.w $FFE8, $F01, $C450, $FFF0
-word_15CE6:	dc.w 1
-	dc.w $FFF0, $E01, $4438, $FFF0
-word_15CF0:	dc.w 1
-	dc.w $FFF0, $E01, $4444, $FFF0
-word_15CFA:	dc.w 1
-	dc.w $FFE8, $F01, $4450, $FFF0
-off_15D04:	dc.l word_15D64
-	dc.l word_15DCE
-	dc.l word_15E28
-	dc.l word_15EB2
-	dc.l word_15F3C
-	dc.l word_15FBE
-	dc.l word_16048
-	dc.l word_160CA
-	dc.l word_16134
-	dc.l word_161B6
-	dc.l word_16240
-	dc.l word_162BA
-	dc.l word_1633C
-	dc.l word_163BE
-	dc.l word_16428
-	dc.l word_16492
-	dc.l word_16514
-	dc.l word_15D64
-	dc.l word_15D64
-	dc.l word_15D64
-	dc.l word_15D64
-	dc.l word_1658E
-	dc.l word_16618
-	dc.l word_1667A
-word_15D64:	dc.w $D
-	dc.w $18, $B04,	$4100, $28
-	dc.w $20, $704,	$410C, $18
-	dc.w $20, $304,	$4114, $40
-	dc.w $30, $304,	$4118, $10
-	dc.w $38, $B04,	$411C, $28
-	dc.w $40, $704,	$4128, $18
-	dc.w $40, $304,	$4130, $40
-	dc.w $48, $304,	$4134, 8
-	dc.w $50, $204,	$4138, $10
-	dc.w $58, $104,	$413B, $38
-	dc.w $58, $104,	$413D, $48
-	dc.w $60, $C04,	$413F, $18
-	dc.w $60, 4, $4143, $40
-word_15DCE:	dc.w $B
-	dc.w $18, $704,	$4100, $28
-	dc.w $20, $704,	$4108, $18
-	dc.w $20, $904,	$4110, $38
-	dc.w $28, $304,	$4116, $10
-	dc.w $30, $704,	$411A, $38
-	dc.w $38, $704,	$4122, $28
-	dc.w $40, $704,	$412A, $18
-	dc.w $48, $704,	$4132, 8
-	dc.w $50, $604,	$413A, $38
-	dc.w $58, $104,	$4140, $48
-	dc.w $60, $C04,	$4142, $18
-word_15E28:	dc.w $11
-	dc.w $18, $F04,	$4100, $20
-	dc.w $20, $304,	$4110, $18
-	dc.w $20, $304,	$4114, $40
-	dc.w $28, $704,	$4118, 8
-	dc.w $28, $304,	$4120, $48
-	dc.w $30, $204,	$4124, 0
-	dc.w $30, $304,	$4127, $50
-	dc.w $38, $F04,	$412B, $20
-	dc.w $40, $304,	$413B, $18
-	dc.w $40, $304,	$413F, $40
-	dc.w $48, $704,	$4143, 8
-	dc.w $50, $204,	$414B, $48
-	dc.w $58, $104,	$414E, $20
-	dc.w $58, $104,	$4150, $38
-	dc.w $60, 4, $4152, $18
-	dc.w $60, $404,	$4153, $28
-	dc.w $60, 4, $4155, $40
-word_15EB2:	dc.w $11
-	dc.w $18, $304,	$4100, $38
-	dc.w $18, $604,	$4104, $58
-	dc.w $20, $F04,	$410A, $18
-	dc.w $20, $704,	$411A, $40
-	dc.w $28, $704,	$4122, 8
-	dc.w $28, $104,	$412A, $50
-	dc.w $30, 4, $412C, $58
-	dc.w $38, $304,	$412D, $38
-	dc.w $40, $E04,	$4131, $18
-	dc.w $40, $704,	$413D, $40
-	dc.w $48, $304,	$4145, $10
-	dc.w $50, $204,	$4149, 8
-	dc.w $58, $104,	$414C, 0
-	dc.w $58, $504,	$414E, $18
-	dc.w $58, $104,	$4152, $38
-	dc.w $60, $404,	$4154, $28
-	dc.w $60, $404,	$4156, $40
-word_15F3C:	dc.w $10
-	dc.w $10, $404,	$4100, $40
-	dc.w $18, $704,	$4102, $48
-	dc.w $20, $F04,	$410A, $18
-	dc.w $20, $704,	$411A, $38
-	dc.w $20, $104,	$4122, $58
-	dc.w $28, $304,	$4124, $10
-	dc.w $30, $204,	$4128, 8
-	dc.w $38, $304,	$412B, $48
-	dc.w $40, $E04,	$412F, $18
-	dc.w $40, $704,	$413B, $38
-	dc.w $48, $304,	$4143, $10
-	dc.w $50, $204,	$4147, 8
-	dc.w $58, $104,	$414A, 0
-	dc.w $58, $504,	$414C, $18
-	dc.w $58, $104,	$4150, $48
-	dc.w $60, $C04,	$4152, $28
-word_15FBE:	dc.w $11
-	dc.w $20, $F04,	$4100, $20
-	dc.w $20, $304,	$4110, $40
-	dc.w $28, $304,	$4114, $18
-	dc.w $28, $A04,	$4118, $48
-	dc.w $30, $104,	$4121, $10
-	dc.w $30, $204,	$4123, $60
-	dc.w $38, $404,	$4126, $68
-	dc.w $40, $E04,	$4128, $20
-	dc.w $40, $704,	$4134, $40
-	dc.w $40, 4, $413C, $68
-	dc.w $48, $704,	$413D, $10
-	dc.w $50, $204,	$4145, 8
-	dc.w $58, $104,	$4148, 0
-	dc.w $58, $104,	$414A, $20
-	dc.w $58, $104,	$414C, $38
-	dc.w $60, $404,	$414E, $28
-	dc.w $60, $404,	$4150, $40
-word_16048:	dc.w $10
-	dc.w 0,	$604, $4100, $38
-	dc.w $10, $304,	$4106, $48
-	dc.w $18, $304,	$410A, $40
-	dc.w $20, $F04,	$410E, $18
-	dc.w $20, $304,	$411E, $38
-	dc.w $28, $104,	$4122, $10
-	dc.w $30, 4, $4124, $48
-	dc.w $38, $304,	$4125, $40
-	dc.w $40, $E04,	$4129, $10
-	dc.w $40, $604,	$4135, $30
-	dc.w $48, $304,	$413B, $48
-	dc.w $50, $204,	$413F, 8
-	dc.w $58, $104,	$4142, 0
-	dc.w $58, $904,	$4144, $10
-	dc.w $58, $504,	$414A, $38
-	dc.w $60, $404,	$414E, $28
-word_160CA:	dc.w $D
-	dc.w $18, $F04,	$4100, $30
-	dc.w $20, $704,	$4110, $20
-	dc.w $20, $204,	$4118, $50
-	dc.w $28, $304,	$411B, $18
-	dc.w $30, $104,	$411F, $10
-	dc.w $38, $F04,	$4121, $30
-	dc.w $40, $604,	$4131, $20
-	dc.w $48, $704,	$4137, $10
-	dc.w $50, $204,	$413F, 8
-	dc.w $58, $104,	$4142, 0
-	dc.w $58, $104,	$4144, $20
-	dc.w $58, $904,	$4146, $38
-	dc.w $60, $404,	$414C, $28
-word_16134:	dc.w $10
-	dc.w 8,	$204, $4100, $40
-	dc.w $10, $304,	$4103, $38
-	dc.w $18, $304,	$4107, $30
-	dc.w $20, $F04,	$410B, 8
-	dc.w $20, $304,	$411B, $28
-	dc.w $28, $104,	$411F, 0
-	dc.w $30, $304,	$4121, $38
-	dc.w $38, $304,	$4125, $30
-	dc.w $40, $E04,	$4129, 8
-	dc.w $40, $204,	$4135, $28
-	dc.w $40, $304,	$4138, $40
-	dc.w $50, $204,	$413C, $38
-	dc.w $50, $204,	$413F, $48
-	dc.w $58, $D04,	$4142, 0
-	dc.w $60, $804,	$414A, $20
-	dc.w $60, 4, $414D, $40
-word_161B6:	dc.w $11
-	dc.w 0,	$704, $4100, $38
-	dc.w 8,	$304, $4108, $30
-	dc.w $18, $304,	$410C, $28
-	dc.w $20, $B04,	$4110, $10
-	dc.w $20, $304,	$411C, $38
-	dc.w $28, $204,	$4120, 8
-	dc.w $28, $304,	$4123, $30
-	dc.w $30, $304,	$4127, $40
-	dc.w $38, $304,	$412B, $28
-	dc.w $40, $A04,	$412F, $10
-	dc.w $40, $304,	$4138, $38
-	dc.w $48, $304,	$413C, 8
-	dc.w $48, $104,	$4140, $30
-	dc.w $48, $304,	$4142, $48
-	dc.w $50, $204,	$4146, $40
-	dc.w $58, $504,	$4149, $10
-	dc.w $60, $C04,	$414D, $20
-word_16240:	dc.w $F
-	dc.w 8,	$F04, $4100, $18
-	dc.w $10, $304,	$4110, $38
-	dc.w $18, $104,	$4114, $10
-	dc.w $18, $304,	$4116, $40
-	dc.w $28, $F04,	$411A, $18
-	dc.w $30, $304,	$412A, $38
-	dc.w $38, $304,	$412E, $10
-	dc.w $38, $304,	$4132, $40
-	dc.w $48, $304,	$4136, 8
-	dc.w $48, $D04,	$413A, $18
-	dc.w $48, $304,	$4142, $48
-	dc.w $50, $204,	$4146, $38
-	dc.w $58, $904,	$4149, $10
-	dc.w $58, $104,	$414F, $40
-	dc.w $60, $404,	$4151, $28
-word_162BA:	dc.w $10
-	dc.w $18, $F04,	$4100, $18
-	dc.w $18, $304,	$4110, $38
-	dc.w $20, $304,	$4114, $40
-	dc.w $28, 4, $4118, $10
-	dc.w $30, $304,	$4119, $48
-	dc.w $38, $F04,	$411D, $18
-	dc.w $38, $304,	$412D, $38
-	dc.w $40, $304,	$4131, $10
-	dc.w $40, $304,	$4135, $40
-	dc.w $48, $304,	$4139, 8
-	dc.w $50, $204,	$413D, $48
-	dc.w $58, $104,	$4140, $18
-	dc.w $58, $104,	$4142, $38
-	dc.w $60, 4, $4144, $10
-	dc.w $60, $804,	$4145, $20
-	dc.w $60, 4, $4148, $40
-word_1633C:	dc.w $10
-	dc.w $18, $F04,	$4100, $18
-	dc.w $18, $304,	$4110, $38
-	dc.w $20, $204,	$4114, $10
-	dc.w $20, $304,	$4117, $40
-	dc.w $30, $304,	$411B, $48
-	dc.w $38, $F04,	$411F, $18
-	dc.w $38, $304,	$412F, $38
-	dc.w $40, $304,	$4133, $10
-	dc.w $40, $304,	$4137, $40
-	dc.w $48, $304,	$413B, 8
-	dc.w $50, $204,	$413F, $48
-	dc.w $58, $104,	$4142, $18
-	dc.w $58, $104,	$4144, $38
-	dc.w $60, 4, $4146, $10
-	dc.w $60, $804,	$4147, $20
-	dc.w $60, 4, $414A, $40
-word_163BE:	dc.w $D
-	dc.w $20, $F04,	$4100, $20
-	dc.w $20, $304,	$4110, $40
-	dc.w $28, $304,	$4114, $18
-	dc.w $30, $304,	$4118, $10
-	dc.w $38, $304,	$411C, $48
-	dc.w $40, $F04,	$4120, $20
-	dc.w $40, $304,	$4130, $40
-	dc.w $48, $304,	$4134, 8
-	dc.w $48, $304,	$4138, $18
-	dc.w $50, $204,	$413C, $10
-	dc.w $58, $104,	$413F, $48
-	dc.w $60, $C04,	$4141, $20
-	dc.w $60, 4, $4145, $40
-word_16428:	dc.w $D
-	dc.w $10, $F04,	$4100, $18
-	dc.w $10, $B04,	$4110, $38
-	dc.w $18, $104,	$411C, $10
-	dc.w $18, $104,	$411E, $50
-	dc.w $30, $E04,	$4120, $18
-	dc.w $30, $B04,	$412C, $38
-	dc.w $38, $304,	$4138, $10
-	dc.w $48, $404,	$413C, $18
-	dc.w $48, 4, $413E, $30
-	dc.w $50, $104,	$413F, 8
-	dc.w $50, 4, $4141, $18
-	dc.w $50, $804,	$4142, $38
-	dc.w $58, 4, $4145, $10
-word_16492:	dc.w $10
-	dc.w 0,	$504, $4100, $40
-	dc.w 8,	$E04, $4104, $18
-	dc.w 8,	$304, $4110, $38
-	dc.w $10, $304,	$4114, $40
-	dc.w $18, $604,	$4118, 8
-	dc.w $20, $B04,	$411E, $20
-	dc.w $20, $304,	$412A, $48
-	dc.w $28, $304,	$412E, $18
-	dc.w $28, $304,	$4132, $38
-	dc.w $30, $304,	$4136, $40
-	dc.w $40, $204,	$413A, $10
-	dc.w $40, $804,	$413D, $20
-	dc.w $40, 4, $4140, $48
-	dc.w $48, $404,	$4141, $18
-	dc.w $48, $404,	$4143, $30
-	dc.w $50, 4, $4145, $18
-word_16514:	dc.w $F
-	dc.w 0,	$704, $4100, $38
-	dc.w 8,	$D04, $4108, 0
-	dc.w 8,	$B04, $4110, $20
-	dc.w $18, $404,	$411C, $10
-	dc.w $20, $304,	$411E, $18
-	dc.w $20, $704,	$4122, $38
-	dc.w $28, $B04,	$412A, $20
-	dc.w $28, $304,	$4136, $48
-	dc.w $40, 4, $413A, $18
-	dc.w $40, $504,	$413B, $38
-	dc.w $40, $104,	$413F, $50
-	dc.w $48, $804,	$4141, $20
-	dc.w $48, $104,	$4144, $48
-	dc.w $50, $404,	$4146, $28
-	dc.w $50, 4, $4148, $40
-word_1658E:	dc.w $11
-	dc.w $18, $F04,	$4100, $18
-	dc.w $18, $304,	$4110, $38
-	dc.w $20, $304,	$4114, $10
-	dc.w $20, $304,	$4118, $40
-	dc.w $30, 4, $411C, 8
-	dc.w $30, $104,	$411D, $48
-	dc.w $38, $F04,	$411F, $18
-	dc.w $38, $304,	$412F, $38
-	dc.w $40, $304,	$4133, $10
-	dc.w $40, $304,	$4137, $40
-	dc.w $48, $304,	$413B, 8
-	dc.w $58, $504,	$413F, $18
-	dc.w $58, $104,	$4143, $38
-	dc.w $58, $104,	$4145, $48
-	dc.w $60, 4, $4147, $10
-	dc.w $60, $404,	$4148, $28
-	dc.w $60, 4, $414A, $40
-word_16618:	dc.w $C
-	dc.w $18, $704,	$4100, $28
-	dc.w $20, $B04,	$4108, $10
-	dc.w $20, $704,	$4114, $38
-	dc.w $30, $104,	$411C, 8
-	dc.w $38, $704,	$411E, $28
-	dc.w $38, 4, $4126, $48
-	dc.w $40, $B04,	$4127, $10
-	dc.w $40, $704,	$4133, $38
-	dc.w $48, $304,	$413B, 8
-	dc.w $48, $304,	$413F, $48
-	dc.w $60, $C04,	$4143, $10
-	dc.w $60, $804,	$4147, $30
-word_1667A:	dc.w $B
-	dc.w $20, $F04,	$4100, $10
-	dc.w $20, $704,	$4110, $30
-	dc.w $28, $304,	$4118, $40
-	dc.w $30, $304,	$411C, 8
-	dc.w $38, 4, $4120, $48
-	dc.w $40, $F04,	$4121, $10
-	dc.w $40, $704,	$4131, $30
-	dc.w $48, $704,	$4139, $40
-	dc.w $50, $204,	$4141, 8
-	dc.w $60, $C04,	$4144, $10
-	dc.w $60, $404,	$4148, $30
-off_166D4:	dc.l word_166FC
-	dc.l word_16706
-	dc.l word_16710
-	dc.l word_1671A
-	dc.l word_1673C
-	dc.l word_1674E
-	dc.l word_16760
-	dc.l word_167D2
-	dc.l word_16814
-	dc.l word_16876
-word_166FC:	dc.w 1
-	dc.w 0,	$402, $2510, 0
-word_16706:	dc.w 1
-	dc.w 0,	$402, $2512, 0
-word_16710:	dc.w 1
-	dc.w $FFFA, $501, $514,	$FFF8
-word_1671A:	dc.w 4
-	dc.w 0,	$502, $518, 0
-	dc.w 0,	$502, $D18, $10
-	dc.w $10, $502,	$1518, 0
-	dc.w $10, $502,	$1D18, $10
-word_1673C:	dc.w 2
-	dc.w $FFF9, $501, $51C,	$FFF8
-	dc.w $FFFE, $503, $6520, $FFFD
-word_1674E:	dc.w 2
-	dc.w $FFF9, $501, $D1C,	$FFF8
-	dc.w $FFFE, $503, $6D20, $FFFD
-word_16760:	dc.w $E
-	dc.w 0,	$501, $2548, 0
-	dc.w 0,	$501, $2528, $10
-	dc.w 0,	$501, $253C, $20
-	dc.w 0,	$501, $254C, $30
-	dc.w 0,	$501, $2524, $40
-	dc.w 0,	$501, $252C, $50
-	dc.w 0,	$501, $2550, $60
-	dc.w 5,	$503, $6578, 5
-	dc.w 5,	$503, $6558, $15
-	dc.w 5,	$503, $656C, $25
-	dc.w 5,	$503, $657C, $35
-	dc.w 5,	$503, $6554, $45
-	dc.w 5,	$503, $655C, $55
-	dc.w 5,	$503, $6580, $65
-word_167D2:	dc.w 8
-	dc.w 0,	$501, $2548, 0
-	dc.w 0,	$501, $2528, $10
-	dc.w 0,	$501, $253C, $20
-	dc.w 0,	$501, $254C, $30
-	dc.w 5,	$503, $6578, 5
-	dc.w 5,	$503, $6558, $15
-	dc.w 5,	$503, $656C, $25
-	dc.w 5,	$503, $657C, $35
-word_16814:	dc.w $C
-	dc.w 0,	$501, $2534, 0
-	dc.w 0,	$501, $2538, $10
-	dc.w 0,	$501, $253C, $20
-	dc.w 0,	$501, $2540, $30
-	dc.w 0,	$501, $2528, $40
-	dc.w 0,	$501, $2544, $50
-	dc.w 5,	$503, $6564, 5
-	dc.w 5,	$503, $6568, $15
-	dc.w 5,	$503, $656C, $25
-	dc.w 5,	$503, $6570, $35
-	dc.w 5,	$503, $6558, $45
-	dc.w 5,	$503, $6574, $55
-word_16876:	dc.w 8
-	dc.w 0,	$501, $2524, 0
-	dc.w 0,	$501, $2528, $10
-	dc.w 0,	$501, $252C, $20
-	dc.w 0,	$501, $2530, $30
-	dc.w 5,	$503, $6554, 5
-	dc.w 5,	$503, $6558, $15
-	dc.w 5,	$503, $655C, $25
-	dc.w 5,	$503, $6560, $35
+; Sprites - Puyo Big
+	include	"resources/mappings/sprite/Puyo Big.asm"	
 	
+; ---------------------------------------------------------------------------
+
+; Sprites - Game Over - Dr Robotnik
+	include	"resources/mappings/sprite/Game Over - Dr Robotnik.asm"	
+		
+; ---------------------------------------------------------------------------
+
+; Sprites - Password
+	include	"resources/mappings/sprite/Password.asm"	
+		
 ; ---------------------------------------------------------------------------
 
 ; Sprites - Cutscene - Dr. Robotnik
@@ -34725,992 +33400,94 @@ word_16876:	dc.w 8
 	
 ; ---------------------------------------------------------------------------	
 
-off_176D8:	dc.l word_176F8
-	dc.l word_17702
-	dc.l word_1770C
-	dc.l word_17716
-	dc.l word_17720
-	dc.l word_1772A
-	dc.l word_17734
-	dc.l word_1773E
-word_176F8:	dc.w 1
-	dc.w 0,	$102, $E0F0, 0
-word_17702:	dc.w 1
-	dc.w 0,	$102, $E0F2, 0
-word_1770C:	dc.w 1
-	dc.w 0,	$102, $E0F4, 0
-word_17716:	dc.w 1
-	dc.w 0,	$102, $E0F6, 0
-word_17720:	dc.w 1
-	dc.w 0,	$100, $C0F0, 0
-word_1772A:	dc.w 1
-	dc.w 0,	$100, $C0F2, 0
-word_17734:	dc.w 1
-	dc.w 0,	$100, $C0F4, 0
-word_1773E:	dc.w 1
-	dc.w 0,	$100, $C0F6, 0
-off_17748:	dc.l word_17764
-	dc.l word_1779E
-	dc.l word_177D8
-	dc.l word_1780A
-	dc.l word_17844
-	dc.l word_1787E
-	dc.l word_178B0
-word_17764:	dc.w 7
-	dc.w 0,	$B02, $E400, 8
-	dc.w 8,	$102, $E40C, 0
-	dc.w 8,	$302, $E40E, $20
-	dc.w $10, 2, $E412, $28
-	dc.w $20, $902,	$E413, 8
-	dc.w $28, 2, $E419, 0
-	dc.w $28, $402,	$E41A, $20
-word_1779E:	dc.w 7
-	dc.w 0,	$B02, $E41C, 8
-	dc.w 8,	$102, $E428, 0
-	dc.w 8,	$302, $E42A, $20
-	dc.w $10, 2, $E42E, $28
-	dc.w $20, $902,	$E42F, 8
-	dc.w $28, 2, $E419, 0
-	dc.w $28, $402,	$E435, $20
-word_177D8:	dc.w 6
-	dc.w 0,	$F02, $E437, 8
-	dc.w 8,	$102, $E447, 0
-	dc.w 8,	2, $E449, $28
-	dc.w $20, $D02,	$E44A, 8
-	dc.w $28, 2, $E419, 0
-	dc.w $28, 2, $E41B, $28
-word_1780A:	dc.w 7
-	dc.w 0,	$B02, $E452, 8
-	dc.w 8,	$302, $E45E, 0
-	dc.w 8,	$302, $E462, $20
-	dc.w $10, 2, $E412, $28
-	dc.w $20, $902,	$E466, 8
-	dc.w $28, 2, $E419, 0
-	dc.w $28, $402,	$E41A, $20
-word_17844:	dc.w 7
-	dc.w 0,	$B02, $E46C, 8
-	dc.w 8,	$102, $E40C, 0
-	dc.w 8,	$302, $E462, $20
-	dc.w $10, 2, $E412, $28
-	dc.w $20, $902,	$E478, 8
-	dc.w $28, 2, $E419, 0
-	dc.w $28, $402,	$E41A, $20
-word_1787E:	dc.w 6
-	dc.w 0,	$E02, $E47E, 0
-	dc.w 8,	$302, $E462, $20
-	dc.w $10, 2, $E412, $28
-	dc.w $18, $A02,	$E48A, 8
-	dc.w $28, 2, $E419, 0
-	dc.w $28, $402,	$E41A, $20
-word_178B0:	dc.w 7
-	dc.w 0,	$B02, $E493, 8
-	dc.w 8,	$102, $E49F, 0
-	dc.w 8,	$302, $E462, $20
-	dc.w $10, 2, $E412, $28
-	dc.w $20, $902,	$E4A1, 8
-	dc.w $28, 2, $E419, 0
-	dc.w $28, $402,	$E41A, $20
-off_178EA:	dc.l word_17902
-	dc.l word_1794C
-	dc.l word_1799E
-	dc.l word_179F0
-	dc.l word_17A4A
-	dc.l word_17AA4
-word_17902:	dc.w 9
-	dc.w 0,	$902, $E400, 8
-	dc.w 0,	$902, $E406, $20
-	dc.w $10, $902,	$E40C, 0
-	dc.w $10, $902,	$E412, $18
-	dc.w $20, $A02,	$E418, 0
-	dc.w $20, $E02,	$E421, $18
-	dc.w $38, $C02,	$E42D, 8
-	dc.w $40, $802,	$E431, 0
-	dc.w $40, $402,	$E434, $18
-word_1794C:	dc.w $A
-	dc.w 0,	$902, $E436, $20
-	dc.w 0,	$902, $E43C, 8
-	dc.w 8,	2, $E442, 0
-	dc.w $10, $902,	$E443, 0
-	dc.w $10, $902,	$E449, $18
-	dc.w $20, $E02,	$E44F, 0
-	dc.w $20, $A02,	$E45B, $20
-	dc.w $38, $C02,	$E42D, 8
-	dc.w $40, $802,	$E431, 0
-	dc.w $40, $402,	$E434, $18
-word_1799E:	dc.w $A
-	dc.w 0,	$902, $E464, 0
-	dc.w 0,	$902, $E46A, $18
-	dc.w $10, $902,	$E470, 0
-	dc.w $10, $902,	$E476, $18
-	dc.w $20, $A02,	$E47C, 0
-	dc.w $20, $602,	$E485, $18
-	dc.w $20, $502,	$E48B, $28
-	dc.w $38, $C02,	$E42D, 8
-	dc.w $40, $802,	$E431, 0
-	dc.w $40, $402,	$E434, $18
-word_179F0:	dc.w $B
-	dc.w 0,	$902, $E48F, 0
-	dc.w 0,	$802, $E495, $18
-	dc.w 8,	$402, $E498, $18
-	dc.w $10, $902,	$E49A, 0
-	dc.w $10, $902,	$E4A0, $18
-	dc.w $20, $E02,	$E4A6, 0
-	dc.w $20, $902,	$E4B2, $20
-	dc.w $30, 2, $E4B8, $20
-	dc.w $38, $C02,	$E42D, 8
-	dc.w $40, $802,	$E431, 0
-	dc.w $40, $402,	$E434, $18
-word_17A4A:	dc.w $B
-	dc.w 0,	$902, $E4B9, 0
-	dc.w 0,	$802, $E4BF, $18
-	dc.w 8,	$402, $E4C2, $18
-	dc.w $10, $902,	$E4C4, 0
-	dc.w $10, $902,	$E4CA, $18
-	dc.w $20, $E02,	$E4D0, 0
-	dc.w $20, $202,	$E4DC, $20
-	dc.w $20, $502,	$E4DF, $28
-	dc.w $38, $C02,	$E42D, 8
-	dc.w $40, $802,	$E431, 0
-	dc.w $40, $402,	$E434, $18
-word_17AA4:	dc.w $B
-	dc.w 0,	$902, $E4E3, 0
-	dc.w 0,	$802, $E4BF, $18
-	dc.w 8,	$402, $E4E9, $18
-	dc.w $10, $902,	$E4C4, 0
-	dc.w $10, $902,	$E4CA, $18
-	dc.w $20, $E02,	$E4D0, 0
-	dc.w $20, $202,	$E4DC, $20
-	dc.w $20, $502,	$E4DF, $28
-	dc.w $38, $C02,	$E42D, 8
-	dc.w $40, $802,	$E431, 0
-	dc.w $40, $402,	$E434, $18
-off_17AFE:	dc.l word_17B32
-	dc.l word_17B3C
-	dc.l word_17B46
-	dc.l word_17B50
-	dc.l word_17B5A
-	dc.l word_17B64
-	dc.l word_17B76
-	dc.l word_17B80
-	dc.l word_17B92
-	dc.l word_17B9C
-	dc.l word_17BA6
-	dc.l word_17BB0
-	dc.l word_17BBA
-word_17B32:	dc.w 1
-	dc.w 0,	$802, $E4DE, 0
-word_17B3C:	dc.w 1
-	dc.w 0,	$802, $E4E1, 0
-word_17B46:	dc.w 1
-	dc.w 0,	$102, $E4E4, 0
-word_17B50:	dc.w 1
-	dc.w 0,	$102, $E4E6, 0
-word_17B5A:	dc.w 1
-	dc.w 0,	$102, $E4E8, 0
-word_17B64:	dc.w 2
-	dc.w 0,	$802, $E4EA, 0
-	dc.w 8,	$402, $E4ED, 8
-word_17B76:	dc.w 1
-	dc.w 0,	$902, $E4EF, 0
-word_17B80:	dc.w 2
-	dc.w 0,	$502, $E4F5, 8
-	dc.w 8,	2, $E4F9, 0
-word_17B92:	dc.w 1
-	dc.w 0,	$802, $C3DE, 0
-word_17B9C:	dc.w 1
-	dc.w 0,	$802, $C3E1, 0
-word_17BA6:	dc.w 1
-	dc.w 0,	$102, $C3E4, 0
-word_17BB0:	dc.w 1
-	dc.w 0,	$102, $C3E6, 0
-word_17BBA:	dc.w 1
-	dc.w 0,	$102, $C3E8, 0
-	dc.w 2
-	dc.w 0,	$802, $C3EA, 0
-	dc.w 8,	$402, $C3ED, 8
-	dc.w 1
-	dc.w 0,	$902, $C3EF, 0
-	dc.w 2
-	dc.w 0,	$502, $C3F5, 8
-	dc.w 8,	2, $C3F9, 0
-off_17BF2:	dc.l word_17C12
-	dc.l word_17C5C
-	dc.l word_17CA6
-	dc.l word_17CE8
-	dc.l word_17D22
-	dc.l word_17D64
-	dc.l word_17D96
-	dc.l word_17DC8
-word_17C12:	dc.w 9
-	dc.w 8,	$D02, $E400, 8
-	dc.w $10, $302,	$E408, $28
-	dc.w $18, $B02,	$E40C, $10
-	dc.w $20, $302,	$E418, $30
-	dc.w $28, $202,	$E41C, 8
-	dc.w $30, $102,	$E41F, $28
-	dc.w $38, 2, $E421, 0
-	dc.w $38, $802,	$E422, $10
-	dc.w $38, 2, $E425, $38
-word_17C5C:	dc.w 9
-	dc.w 8,	$D02, $E426, 8
-	dc.w $10, $302,	$E408, $28
-	dc.w $18, $B02,	$E42E, $10
-	dc.w $20, $302,	$E418, $30
-	dc.w $28, $202,	$E41C, 8
-	dc.w $30, $102,	$E41F, $28
-	dc.w $38, 2, $E421, 0
-	dc.w $38, $802,	$E422, $10
-	dc.w $38, 2, $E425, $38
-word_17CA6:	dc.w 8
-	dc.w 8,	$F02, $E43A, $10
-	dc.w $10, 2, $E44A, 8
-	dc.w $18, $302,	$E44B, $30
-	dc.w $20, $202,	$E44F, 8
-	dc.w $28, $102,	$E452, 0
-	dc.w $28, $C02,	$E454, $10
-	dc.w $30, $902,	$E458, $18
-	dc.w $38, $402,	$E45E, $30
-word_17CE8:	dc.w 7
-	dc.w 0,	$B02, $E460, $18
-	dc.w 8,	$602, $E46C, 8
-	dc.w $10, $302,	$E472, $30
-	dc.w $18, $202,	$E476, $38
-	dc.w $20, $B02,	$E479, $18
-	dc.w $30, $102,	$E41A, $30
-	dc.w $38, 2, $E425, $38
-word_17D22:	dc.w 8
-	dc.w 0,	$B02, $E485, $18
-	dc.w 8,	$602, $E491, 8
-	dc.w 8,	$302, $E497, $30
-	dc.w $10, $102,	$E49B, 0
-	dc.w $18, $202,	$E476, $38
-	dc.w $20, $B02,	$E479, $18
-	dc.w $28, $202,	$E49D, $30
-	dc.w $38, 2, $E425, $38
-word_17D64:	dc.w 6
-	dc.w 0,	$B02, $E4A0, $18
-	dc.w 8,	$602, $E4AC, 8
-	dc.w $18, $602,	$E4B2, $30
-	dc.w $20, $B02,	$E479, $18
-	dc.w $30, $102,	$E41A, $30
-	dc.w $38, 2, $E425, $38
-word_17D96:	dc.w 6
-	dc.w 0,	$B02, $E4B8, $18
-	dc.w 8,	$602, $E4C4, 8
-	dc.w $18, $602,	$E4B2, $30
-	dc.w $20, $B02,	$E479, $18
-	dc.w $30, $102,	$E41A, $30
-	dc.w $38, 2, $E425, $38
-word_17DC8:	dc.w 6
-	dc.w 0,	$B02, $E4CA, $18
-	dc.w 8,	$602, $E4C4, 8
-	dc.w $18, $602,	$E4B2, $30
-	dc.w $20, $B02,	$E479, $18
-	dc.w $30, $102,	$E41A, $30
-	dc.w $38, 2, $E425, $38
-off_17DFA:	dc.l word_17E22
-	dc.l word_17E4C
-	dc.l word_17E7E
-	dc.l word_17EB0
-	dc.l word_17EEA
-	dc.l word_17F2C
-	dc.l word_17F6E
-	dc.l word_17F90
-	dc.l word_17FCA
-	dc.l word_17FF4
-word_17E22:	dc.w 5
-	dc.w $28, $C02,	$E400, 8
-	dc.w $30, $A02,	$E404, $10
-	dc.w $48, $702,	$E40D, $10
-	dc.w $60, $402,	$E415, 0
-	dc.w $60, 2, $E417, $20
-word_17E4C:	dc.w 6
-	dc.w $38, $C02,	$E418, 0
-	dc.w $40, $802,	$E41C, 8
-	dc.w $48, $702,	$E41F, $10
-	dc.w $58, $102,	$E427, 8
-	dc.w $60, 2, $E415, 0
-	dc.w $60, 2, $E417, $20
-word_17E7E:	dc.w 6
-	dc.w $38, $702,	$E429, $10
-	dc.w $40, 2, $E431, 8
-	dc.w $40, $302,	$E432, $20
-	dc.w $58, $502,	$E436, $10
-	dc.w $60, $402,	$E43A, 0
-	dc.w $60, 2, $E417, $20
-word_17EB0:	dc.w 7
-	dc.w $20, $902,	$E43C, 0
-	dc.w $28, $302,	$E442, $18
-	dc.w $30, $402,	$E446, 8
-	dc.w $38, $302,	$E448, $10
-	dc.w $48, $302,	$E44C, $18
-	dc.w $50, $202,	$E450, 8
-	dc.w $60, 2, $E453, $10
-word_17EEA:	dc.w 8
-	dc.w 0,	$602, $E454, 8
-	dc.w 8,	$302, $E45A, $18
-	dc.w $18, $302,	$E45E, $10
-	dc.w $28, 2, $E462, $18
-	dc.w $30, $202,	$E463, 8
-	dc.w $38, $102,	$E466, 0
-	dc.w $38, $502,	$E468, $10
-	dc.w $60, $802,	$E46C, 8
-word_17F2C:	dc.w 8
-	dc.w 0,	$D02, $E46F, 8
-	dc.w $10, $802,	$E477, 8
-	dc.w $18, $602,	$E47A, 8
-	dc.w $20, $102,	$E480, $18
-	dc.w $28, $102,	$E482, 0
-	dc.w $28, 2, $E484, $20
-	dc.w $30, 2, $EC7F, 8
-	dc.w $60, $802,	$E485, 8
-word_17F6E:	dc.w 4
-	dc.w 0,	$C02, $E488, 8
-	dc.w 8,	$F02, $E48C, 0
-	dc.w $10, $102,	$E49C, $20
-	dc.w $60, $802,	$E485, 8
-word_17F90:	dc.w 7
-	dc.w $20, $802,	$E49E, 0
-	dc.w $28, $702,	$E4A1, 8
-	dc.w $30, $302,	$E4A9, $18
-	dc.w $40, $102,	$E4AD, $20
-	dc.w $48, $802,	$E4AF, 0
-	dc.w $50, $402,	$E4B2, 8
-	dc.w $60, $802,	$E4B4, 8
-word_17FCA:	dc.w 5
-	dc.w $28, $C02,	$E400, 8
-	dc.w $30, $A02,	$E4B7, $10
-	dc.w $48, $702,	$E4C0, $10
-	dc.w $60, $402,	$E415, 0
-	dc.w $60, 2, $E417, $20
-word_17FF4:	dc.w 5
-	dc.w $28, $C02,	$E400, 8
-	dc.w $30, $B02,	$E4C8, $10
-	dc.w $50, $602,	$E4D4, $10
-	dc.w $60, $402,	$E415, 0
-	dc.w $60, 2, $E417, $20
-off_1801E:	dc.l word_1802A
-	dc.l word_18034
-	dc.l word_1803E
-word_1802A:	dc.w 1
-	dc.w 0,	$E02, $E4D7, 0
-word_18034:	dc.w 1
-	dc.w 0,	$E02, $E4E3, 0
-word_1803E:	dc.w 1
-	dc.w 0,	$E02, $E4EF, 0
-off_18048:	dc.l word_18064
-	dc.l word_180BE
-	dc.l word_18108
-	dc.l word_18172
-	dc.l word_181CC
-	dc.l word_18216
-	dc.l word_18270
-word_18064:	dc.w $B
-	dc.w 0,	$602, $E400, $28
-	dc.w $10, $302,	$E406, $20
-	dc.w $10, $902,	$E40A, $58
-	dc.w $18, 2, $E410, $28
-	dc.w $18, $502,	$E411, $48
-	dc.w $28, $F02,	$E415, $28
-	dc.w $28, $302,	$E425, $48
-	dc.w $30, $202,	$E429, $20
-	dc.w $38, 2, $E42C, $50
-	dc.w $48, $C02,	$E42D, $28
-	dc.w $48, 2, $E431, $48
-word_180BE:	dc.w 9
-	dc.w 8,	$502, $E432, $48
-	dc.w $10, $602,	$E436, $10
-	dc.w $18, $702,	$E43C, $40
-	dc.w $28, $502,	$E444, $18
-	dc.w $28, $702,	$E448, $30
-	dc.w $30, $302,	$E450, $28
-	dc.w $38, $102,	$E454, $20
-	dc.w $38, $902,	$E456, $40
-	dc.w $48, $C02,	$E45C, $30
-word_18108:	dc.w $D
-	dc.w 8,	$602, $E460, $30
-	dc.w $10, $402,	$E466, $40
-	dc.w $18, $602,	$E460, 0
-	dc.w $18, $302,	$E468, $48
-	dc.w $20, $C02,	$E46C, $10
-	dc.w $20, $302,	$E470, $50
-	dc.w $28, $C02,	$E474, $20
-	dc.w $28, $302,	$E478, $40
-	dc.w $30, $B02,	$E47C, $28
-	dc.w $38, $102,	$E488, $20
-	dc.w $38, $202,	$E48A, $48
-	dc.w $40, 2, $E48D, $50
-	dc.w $48, 2, $E48E, $40
-word_18172:	dc.w $B
-	dc.w 0,	$602, $E48F, $40
-	dc.w $10, $902,	$E495, 8
-	dc.w $10, $302,	$E49B, $50
-	dc.w $18, $502,	$E49F, $20
-	dc.w $18, 2, $E4A3, $48
-	dc.w $28, $F02,	$E4A4, $28
-	dc.w $28, $302,	$E4B4, $48
-	dc.w $30, $202,	$E4B8, $50
-	dc.w $38, 2, $E4BB, $20
-	dc.w $48, $C02,	$E4BC, $28
-	dc.w $48, 2, $E431, $48
-word_181CC:	dc.w 9
-	dc.w 8,	$902, $E4C0, $18
-	dc.w $10, $602,	$E4C6, $58
-	dc.w $18, $702,	$E4CC, $28
-	dc.w $28, $702,	$E4D4, $38
-	dc.w $28, $502,	$E4DC, $50
-	dc.w $30, $302,	$E4E0, $48
-	dc.w $38, $902,	$E4E4, $20
-	dc.w $38, $102,	$E4EA, $50
-	dc.w $48, $C02,	$E4EC, $28
-word_18216:	dc.w $B
-	dc.w 8,	$602, $E300, $38
-	dc.w $10, $402,	$E306, $28
-	dc.w $18, $302,	$E308, $28
-	dc.w $18, $502,	$E30C, $68
-	dc.w $20, $C02,	$E310, $48
-	dc.w $28, $F02,	$E314, $30
-	dc.w $28, 2, $E324, $50
-	dc.w $30, $202,	$E325, $20
-	dc.w $38, $202,	$E328, $28
-	dc.w $38, $102,	$E32B, $50
-	dc.w $48, $C02,	$E32D, $30
-word_18270:	dc.w $B
-	dc.w 8,	$602, $E030, $38
-	dc.w $10, $402,	$E036, $28
-	dc.w $18, $302,	$E038, $28
-	dc.w $18, $502,	$E03C, $68
-	dc.w $20, $C02,	$E040, $48
-	dc.w $28, $F02,	$E044, $30
-	dc.w $28, 2, $E054, $50
-	dc.w $30, $202,	$E055, $20
-	dc.w $38, $202,	$E058, $28
-	dc.w $38, $102,	$E05B, $50
-	dc.w $48, $C02,	$E05D, $30
-off_182CA:	dc.l word_182F2
-	dc.l word_1830C
-	dc.l word_18316
-	dc.l word_18368
-	dc.l word_18320
-	dc.l word_18332
-	dc.l word_1837A
-	dc.l word_1834C
-	dc.l word_18384
-	dc.l word_18356
-word_182F2:	dc.w 3
-	dc.w 0,	$602, $E480, 8
-	dc.w 8,	$102, $E486, 0
-	dc.w 8,	$102, $E488, $18
-word_1830C:	dc.w 1
-	dc.w 0,	$E02, $E48A, 0
-word_18316:	dc.w 1
-	dc.w 0,	$E02, $E496, 0
-word_18320:	dc.w 2
-	dc.w 0,	$D02, $E4A2, 0
-	dc.w $10, $802,	$E4AA, 0
-word_18332:	dc.w 3
-	dc.w 0,	$602, $E4AD, 8
-	dc.w 8,	$102, $E4B3, 0
-	dc.w 8,	$102, $E4B5, $18
-word_1834C:	dc.w 1
-	dc.w 0,	$E02, $E4B7, 0
-word_18356:	dc.w 2
-	dc.w 0,	$D02, $E4C3, 0
-	dc.w $10, $802,	$E4CB, 0
-word_18368:	dc.w 2
-	dc.w 0,	$A02, $E440, 0
-	dc.w 8,	$102, $E449, $18
-word_1837A:	dc.w 1
-	dc.w 0,	$E02, $E44B, 0
-word_18384:	dc.w 2
-	dc.w 0,	$A02, $E457, 0
-	dc.w 8,	$102, $E460, $18
-off_18396:	dc.l word_183A6
-	dc.l word_18408
-	dc.l word_18452
-	dc.l word_184A4
-word_183A6:	dc.w $C
-	dc.w 0,	$702, $E400, $10
-	dc.w 8,	$102, $E408, 8
-	dc.w 8,	$302, $E40A, $20
-	dc.w $10, $302,	$E40E, $28
-	dc.w $18, $202,	$E412, $30
-	dc.w $20, $502,	$E415, $10
-	dc.w $28, $502,	$E419, 0
-	dc.w $28, $202,	$E41D, $20
-	dc.w $30, $102,	$E420, $10
-	dc.w $30, $102,	$E422, $28
-	dc.w $38, 2, $E424, 8
-	dc.w $38, 2, $E425, $18
-word_18408:	dc.w 9
-	dc.w 0,	$302, $E426, $18
-	dc.w 8,	$302, $E42A, $20
-	dc.w $10, $902,	$E42E, 0
-	dc.w $10, $302,	$E434, $28
-	dc.w $18, $202,	$E438, $30
-	dc.w $20, $B02,	$E43B, 8
-	dc.w $28, $202,	$E447, $20
-	dc.w $30, 2, $E44A, 0
-	dc.w $30, $102,	$E44B, $28
-word_18452:	dc.w $A
-	dc.w 8,	$702, $E44D, $18
-	dc.w $10, $302,	$E455, $10
-	dc.w $10, $302,	$E459, $28
-	dc.w $18, $302,	$E45D, 8
-	dc.w $18, $202,	$E461, $30
-	dc.w $20, 2, $E464, $38
-	dc.w $28, $602,	$E465, $18
-	dc.w $30, $102,	$E46B, $10
-	dc.w $30, $102,	$E46D, $28
-	dc.w $38, 2, $E46F, 8
-word_184A4:	dc.w 6
-	dc.w 8,	$702, $E470, $18
-	dc.w $10, $302,	$E478, $10
-	dc.w $10, $602,	$E47C, $28
-	dc.w $28, $202,	$E482, 8
-	dc.w $28, $A02,	$E485, $18
-	dc.w $30, $102,	$E48E, $10
-off_184D6:	dc.l word_184E2
-	dc.l word_18554
-	dc.l word_185AE
-word_184E2:	dc.w $E
-	dc.w 0,	$702, $E400, $18
-	dc.w 8,	$702, $E408, 8
-	dc.w 8,	$302, $E410, $28
-	dc.w $10, $302,	$E414, $30
-	dc.w $18, $102,	$E418, 0
-	dc.w $18, $202,	$E41A, $38
-	dc.w $20, $702,	$E41D, $18
-	dc.w $28, $502,	$E425, 8
-	dc.w $28, $302,	$E429, $28
-	dc.w $30, 2, $E42D, $30
-	dc.w $38, $102,	$E42E, $10
-	dc.w $40, 2, $E430, 8
-	dc.w $40, $402,	$E431, $18
-	dc.w $40, 2, $E433, $30
-word_18554:	dc.w $B
-	dc.w 0,	$702, $E434, $18
-	dc.w 8,	$702, $E43C, 8
-	dc.w 8,	$302, $E444, $28
-	dc.w $10, $202,	$E448, 0
-	dc.w $10, $702,	$E44B, $30
-	dc.w $20, $702,	$E453, $18
-	dc.w $28, $702,	$E45B, 8
-	dc.w $28, $302,	$E463, $28
-	dc.w $30, 2, $E467, $30
-	dc.w $40, $402,	$E468, $18
-	dc.w $40, 2, $E433, $30
-word_185AE:	dc.w $B
-	dc.w 0,	$702, $E46A, $18
-	dc.w 8,	$702, $E472, 8
-	dc.w 8,	$302, $E47A, $28
-	dc.w $10, $202,	$E47E, 0
-	dc.w $10, $702,	$E481, $30
-	dc.w $20, $702,	$E489, $18
-	dc.w $28, $702,	$E491, 8
-	dc.w $28, $302,	$E499, $28
-	dc.w $30, 2, $E49D, $30
-	dc.w $40, $402,	$E49E, $18
-	dc.w $40, 2, $E433, $30
-off_18608:	dc.l word_18624
-	dc.l word_1867E
-	dc.l word_186D8
-	dc.l word_18732
-	dc.l word_1873C
-	dc.l word_18746
-	dc.l word_18750
-word_18624:	dc.w $B
-	dc.w 0,	$F02, $E400, 8
-	dc.w 0,	$A02, $E410, $28
-	dc.w 8,	$302, $E419, 0
-	dc.w $18, $602,	$E41D, $28
-	dc.w $20, $F02,	$E423, 8
-	dc.w $20, $102,	$E433, $38
-	dc.w $28, $102,	$E435, 0
-	dc.w $30, $202,	$E437, $30
-	dc.w $38, $102,	$E43A, $28
-	dc.w $40, $C02,	$E43C, 0
-	dc.w $40, 2, $E440, $20
-word_1867E:	dc.w $B
-	dc.w 0,	$F02, $E441, 8
-	dc.w 0,	$A02, $E451, $28
-	dc.w 8,	$302, $E45A, 0
-	dc.w $18, $602,	$E45E, $28
-	dc.w $20, $F02,	$E464, 8
-	dc.w $20, $102,	$E433, $38
-	dc.w $28, $102,	$E435, 0
-	dc.w $30, $202,	$E437, $30
-	dc.w $38, $102,	$E43A, $28
-	dc.w $40, $C02,	$E43C, 0
-	dc.w $40, 2, $E440, $20
-word_186D8:	dc.w $B
-	dc.w 0,	$F02, $E474, 8
-	dc.w 0,	$A02, $E484, $28
-	dc.w 8,	$302, $E48D, 0
-	dc.w $18, $602,	$E41D, $28
-	dc.w $20, $F02,	$E491, 8
-	dc.w $20, $102,	$E433, $38
-	dc.w $28, $102,	$E435, 0
-	dc.w $30, $202,	$E437, $30
-	dc.w $38, $102,	$E43A, $28
-	dc.w $40, $C02,	$E43C, 0
-	dc.w $40, 2, $E440, $20
-word_18732:	dc.w 1
-	dc.w 0,	1, $84A1, 0
-word_1873C:	dc.w 1
-	dc.w 0,	1, $8CA1, 0
-word_18746:	dc.w 1
-	dc.w 0,	1, $94A1, 0
-word_18750:	dc.w 1
-	dc.w 0,	1, $9CA1, 0
-off_1875A:	dc.l word_18772
-	dc.l word_187A4
-	dc.l word_187E6
-	dc.l word_18848
-	dc.l word_1889A
-	dc.l word_188D4
-word_18772:	dc.w 6
-	dc.w 8,	$B02, $E400, 8
-	dc.w $10, $902,	$E40C, $20
-	dc.w $20, $302,	$E412, 0
-	dc.w $20, $702,	$E416, $20
-	dc.w $28, $A02,	$E41E, 8
-	dc.w $38, 2, $E427, $30
-word_187A4:	dc.w 8
-	dc.w 8,	$B02, $E428, $10
-	dc.w $10, $302,	$E434, 8
-	dc.w $18, $902,	$E438, $28
-	dc.w $20, 2, $E43E, 0
-	dc.w $28, $E02,	$E43F, $10
-	dc.w $30, $102,	$E44B, 8
-	dc.w $38, 2, $E415, 0
-	dc.w $38, 2, $E427, $30
-word_187E6:	dc.w $C
-	dc.w 0,	$302, $E44D, $18
-	dc.w 8,	$302, $E451, $10
-	dc.w 8,	$702, $E455, $20
-	dc.w $10, $302,	$E45D, 8
-	dc.w $18, $202,	$E461, $30
-	dc.w $20, $302,	$E464, $18
-	dc.w $20, $102,	$E468, $38
-	dc.w $28, $202,	$E46A, $10
-	dc.w $28, $602,	$E46D, $20
-	dc.w $30, $102,	$E44B, 8
-	dc.w $38, 2, $E415, 0
-	dc.w $38, 2, $E427, $30
-word_18848:	dc.w $A
-	dc.w 0,	$702, $E473, $18
-	dc.w 8,	$502, $E47B, $28
-	dc.w $10, $702,	$E47F, 8
-	dc.w $18, $302,	$E487, $28
-	dc.w $20, $702,	$E48B, $18
-	dc.w $20, $102,	$E493, $30
-	dc.w $28, 2, $E495, $38
-	dc.w $30, $502,	$E496, 8
-	dc.w $38, 2, $E415, 0
-	dc.w $38, $402,	$E49A, $28
-word_1889A:	dc.w 7
-	dc.w 8,	$F02, $E49C, $10
-	dc.w $10, $302,	$E4AC, $30
-	dc.w $18, $302,	$E4B0, 8
-	dc.w $28, $E02,	$E4B4, $10
-	dc.w $30, $402,	$E4C0, $30
-	dc.w $38, $402,	$E4C2, 0
-	dc.w $38, 2, $E427, $30
-word_188D4:	dc.w 8
-	dc.w 8,	$F02, $E4C4, $10
-	dc.w $10, $302,	$E45D, 8
-	dc.w $18, $202,	$E461, $30
-	dc.w $20, $102,	$E468, $38
-	dc.w $28, $E02,	$E4D4, $10
-	dc.w $30, $102,	$E44B, 8
-	dc.w $38, 2, $E415, 0
-	dc.w $38, 2, $E427, $30
-off_18916:	dc.l word_189D8
-	dc.l word_189FA
-	dc.l word_18A1C
-	dc.l word_18942
-	dc.l word_18974
-	dc.l word_189A6
-	dc.l word_18A3E
-	dc.l word_18A80
-	dc.l word_18AC2
-	dc.l word_18ACC
-	dc.l word_18AD6
-word_18942:	dc.w 6
-	dc.w 0,	$E02, $E400, 0
-	dc.w 0,	$302, $E40C, $20
-	dc.w 8,	$202, $E410, $28
-	dc.w $18, $A02,	$E413, 8
-	dc.w $20, $102,	$E41C, 0
-	dc.w $20, $102,	$E41E, $20
-word_18974:	dc.w 6
-	dc.w 0,	$F02, $E420, 0
-	dc.w 0,	$302, $E430, $28
-	dc.w 8,	$302, $E434, $20
-	dc.w $20, $D02,	$E438, 0
-	dc.w $20, $102,	$E440, $28
-	dc.w $28, 2, $E442, $20
-word_189A6:	dc.w 6
-	dc.w 0,	$F02, $EC20, $10
-	dc.w 0,	$302, $EC30, 0
-	dc.w 8,	$302, $EC34, 8
-	dc.w $20, $D02,	$EC38, $10
-	dc.w $20, $102,	$EC40, 0
-	dc.w $28, 2, $EC42, 8
-word_189D8:	dc.w 4
-	dc.w 0,	$F02, $E443, 8
-	dc.w 8,	$202, $E453, 0
-	dc.w $18, $202,	$E456, $28
-	dc.w $20, $D02,	$E459, 8
-word_189FA:	dc.w 4
-	dc.w 0,	$B00, $E461, $18
-	dc.w 8,	$B00, $E46D, 0
-	dc.w $20, $900,	$E479, $18
-	dc.w $28, $800,	$E47F, 0
-word_18A1C:	dc.w 4
-	dc.w 0,	$B00, $EC61, 0
-	dc.w 8,	$B00, $EC6D, $18
-	dc.w $20, $900,	$EC79, 0
-	dc.w $28, $800,	$EC7F, $18
-word_18A3E:	dc.w 8
-	dc.w 0,	$B02, $E482, 8
-	dc.w 0,	$302, $E48E, $28
-	dc.w 8,	$302, $E492, 0
-	dc.w 8,	$302, $E496, $20
-	dc.w $20, $902,	$E49A, 8
-	dc.w $20, $102,	$E4A0, $28
-	dc.w $28, 2, $E4A2, 0
-	dc.w $28, 2, $E4A3, $20
-word_18A80:	dc.w 8
-	dc.w 0,	$B02, $E4A4, 8
-	dc.w 0,	$302, $E48E, $28
-	dc.w 8,	$302, $E492, 0
-	dc.w 8,	$302, $E496, $20
-	dc.w $20, $902,	$E49A, 8
-	dc.w $20, $102,	$E4A0, $28
-	dc.w $28, 2, $E4A2, 0
-	dc.w $28, 2, $E4A3, $20
-word_18AC2:	dc.w 1
-	dc.w 8,	1, $E4B0, 0
-word_18ACC:	dc.w 1
-	dc.w 8,	$401, $E4B1, 0
-word_18AD6:	dc.w 1
-	dc.w 0,	$501, $E4B3, 0
-off_18AE0:	dc.l word_18AF4
-	dc.l word_18B3E
-	dc.l word_18B88
-	dc.l word_18BDA
-	dc.l word_18C24
-word_18AF4:	dc.w 9
-	dc.w 8,	$702, $E400, $18
-	dc.w $10, $302,	$E408, $10
-	dc.w $18, $302,	$E40C, $28
-	dc.w $20, $302,	$E410, $30
-	dc.w $28, $702,	$E414, $18
-	dc.w $28, $302,	$E41C, $38
-	dc.w $30, $202,	$E420, $10
-	dc.w $38, $102,	$E423, $28
-	dc.w $40, 2, $E425, $30
-word_18B3E:	dc.w 9
-	dc.w 8,	$702, $E426, $18
-	dc.w $10, $302,	$E42E, $10
-	dc.w $10, $302,	$E432, $28
-	dc.w $20, $302,	$E436, $30
-	dc.w $28, $702,	$E43A, $18
-	dc.w $28, $302,	$E442, $38
-	dc.w $30, $202,	$E446, $10
-	dc.w $30, $202,	$E449, $28
-	dc.w $40, 2, $E44C, $30
-word_18B88:	dc.w $A
-	dc.w 0,	$702, $E44D, $18
-	dc.w $10, $302,	$E455, $28
-	dc.w $18, $302,	$E459, $10
-	dc.w $20, $702,	$E45D, $18
-	dc.w $20, $302,	$E465, $30
-	dc.w $28, $302,	$E469, $38
-	dc.w $30, $202,	$E46D, $28
-	dc.w $38, $102,	$E470, $10
-	dc.w $40, $402,	$E472, $18
-	dc.w $40, 2, $E474, $30
-word_18BDA:	dc.w 9
-	dc.w 8,	$702, $E475, $18
-	dc.w $10, $302,	$E47D, $10
-	dc.w $18, $302,	$E481, $28
-	dc.w $20, $302,	$E485, $30
-	dc.w $28, $702,	$E489, $18
-	dc.w $28, $302,	$E491, $38
-	dc.w $30, $202,	$E495, $10
-	dc.w $38, $102,	$E498, $28
-	dc.w $40, 2, $E49A, $30
-word_18C24:	dc.w 8
-	dc.w $10, $702,	$E49B, $18
-	dc.w $18, $302,	$E4A3, $10
-	dc.w $18, $302,	$E4A7, $28
-	dc.w $28, $702,	$E4AB, $30
-	dc.w $30, $602,	$E4B3, $18
-	dc.w $30, $202,	$E4B9, $40
-	dc.w $38, $102,	$E4BC, $10
-	dc.w $38, $102,	$E4BE, $28
+; Sprites - Portrait - Frankly
+	include	"resources/mappings/sprite/Portrait - Frankly.asm"	
+	
+; ---------------------------------------------------------------------------	
 
+; Sprites - Cutscene - Coconuts
+	include	"resources/mappings/sprite/Cutscene - Coconuts.asm"	
+	
+; ---------------------------------------------------------------------------	
+
+; Sprites - Cutscene - Frankly
+	include	"resources/mappings/sprite/Cutscene - Frankly.asm"	
+	
+; ---------------------------------------------------------------------------	
+
+; Sprites - Portrait - Humpty
+	include	"resources/mappings/sprite/Portrait - Humpty.asm"	
+		
+; ---------------------------------------------------------------------------
+
+; Sprites - Cutscene - Davy Sprocket
+	include	"resources/mappings/sprite/Cutscene - Davy Sprocket.asm"	
+	
+; ---------------------------------------------------------------------------
+
+; Sprites - Cutscene - Dynamight
+	include	"resources/mappings/sprite/Cutscene - Dynamight.asm"	
+	
+; ---------------------------------------------------------------------------
+
+; Sprites - Portrait - Sir Ffuzzy-Logik
+	include	"resources/mappings/sprite/Portrait - Sir Ffuzzy-Logik.asm"	
+
+; ---------------------------------------------------------------------------
+
+; Sprites - Cutscene - Arms
+	include	"resources/mappings/sprite/Cutscene - Arms.asm"	
+	
+; ---------------------------------------------------------------------------
+
+; Sprites - Select Level - Faces
+	include	"resources/mappings/sprite/Select Level - Faces.asm"	
+	
+; ---------------------------------------------------------------------------
+
+; Sprites - Cutscene - Spike
+	include	"resources/mappings/sprite/Cutscene - Spike.asm"	
+		
+; ---------------------------------------------------------------------------
+
+; Sprites - Cutscene - Dragon Breath
+	include	"resources/mappings/sprite/Cutscene - Dragon Breath.asm"	
+	
+; ---------------------------------------------------------------------------
+
+; Sprites - Cutscene - Sir Ffuzzy-Logik
+	include	"resources/mappings/sprite/Cutscene - Sir Ffuzzy-Logik.asm"	
+	
+; ---------------------------------------------------------------------------
+
+; Sprites - Cutscene - Humpty
+	include	"resources/mappings/sprite/Cutscene - Humpty.asm"	
+	
+; ---------------------------------------------------------------------------
+
+; Sprites - Cutscene - Grounder
+	include	"resources/mappings/sprite/Cutscene - Grounder.asm"	
+	
+; ---------------------------------------------------------------------------
+
+; Sprites - Cutscene - Skweel
+	include	"resources/mappings/sprite/Cutscene - Skweel.asm"	
+	
 ; ---------------------------------------------------------------------------
 
 ; Sprites - Cutscene - Scratch
 	include	"resources/mappings/sprite/Cutscene - Scratch.asm"	
 	
 ; ---------------------------------------------------------------------------
-		
-off_19084:	dc.l word_190CC
-	dc.l word_190D6
-	dc.l word_190E0
-	dc.l word_190EA
-	dc.l word_190F4
-	dc.l word_190FE
-	dc.l word_19108
-	dc.l word_19112
-	dc.l word_1911C
-	dc.l word_19126
-	dc.l word_19178
-	dc.l word_19182
-	dc.l word_1918C
-	dc.l word_19196
-	dc.l word_191A0
-	dc.l word_191AA
-	dc.l word_191B4
-	dc.l word_191C6
-word_190CC:	dc.w 1
-	dc.w $FFF8, $502, $E330, $FFF8
-word_190D6:	dc.w 1
-	dc.w $FFF8, $502, $E38A, $FFF8
-word_190E0:	dc.w 1
-	dc.w $FFF8, $502, $E38E, $FFF8
-word_190EA:	dc.w 1
-	dc.w $FFF8, $502, $E392, $FFF8
-word_190F4:	dc.w 1
-	dc.w $FFF8, $502, $E396, $FFF8
-word_190FE:	dc.w 1
-	dc.w $FFF8, $502, $E340, $FFF8
-word_19108:	dc.w 1
-	dc.w $FFF8, $502, $E3A6, $FFF8
-word_19112:	dc.w 1
-	dc.w $FFF8, $502, $E3AA, $FFF8
-word_1911C:	dc.w 1
-	dc.w $FFF8, $502, $EBA6, $FFF8
-word_19126:	dc.w $A
-	dc.w 0,	$C00, $E014, 0
-	dc.w 0,	$C00, $E814, $30
-	dc.w $30, $C00,	$F014, 0
-	dc.w $30, $C00,	$F814, $30
-	dc.w 8,	$200, $E018, 0
-	dc.w 8,	$200, $E818, $48
-	dc.w $20, $100,	$E818, $48
-	dc.w $20, $100,	$E018, 0
-	dc.w $30, $400,	$F015, $20
-	dc.w 0,	$400, $E015, $20
-word_19178:	dc.w 1
-	dc.w 2,	$403, $C020, $A
-word_19182:	dc.w 1
-	dc.w 1,	$403, $C022, 9
-word_1918C:	dc.w 1
-	dc.w 1,	$803, $C024, 6
-word_19196:	dc.w 1
-	dc.w 1,	$803, $C027, 5
-word_191A0:	dc.w 1
-	dc.w 1,	$803, $C02A, 4
-word_191AA:	dc.w 1
-	dc.w 1,	$C03, $C02D, 3
-word_191B4:	dc.w 2
-	dc.w 0,	$C03, $C031, 2
-	dc.w 8,	$803, $C035, 2
-word_191C6:	dc.w 1
-	dc.w 0,	$D03, $C038, 0
-off_191D0:	dc.l word_19240
-	dc.l word_1924A
-	dc.l word_19254
-	dc.l word_1925E
-	dc.l word_19268
-	dc.l word_19272
-	dc.l word_1927C
-	dc.l word_1928E
-	dc.l word_19298
-	dc.l word_192A2
-	dc.l word_192B4
-	dc.l word_192BE
-	dc.l word_192C8
-	dc.l word_192D2
-	dc.l word_192DC
-	dc.l word_192E6
-	dc.l word_192F0
-	dc.l word_192FA
-	dc.l word_19304
-	dc.l word_1930E
-	dc.l word_19318
-	dc.l word_19322
-	dc.l word_1932C
-	dc.l word_19336
-	dc.l word_19340
-	dc.l word_1934A
-	dc.l word_19354
-	dc.l word_1935E
-word_19240:	dc.w 1
-	dc.w 1,	$F03, $C400, 0
-word_1924A:	dc.w 1
-	dc.w 1,	$F03, $C410, 0
-word_19254:	dc.w 1
-	dc.w 1,	$B03, $C420, 4
-word_1925E:	dc.w 1
-	dc.w 0,	$B03, $C42C, 5
-word_19268:	dc.w 1
-	dc.w $48, $F03,	$C438, 0
-word_19272:	dc.w 1
-	dc.w $50, $E03,	$C448, 0
-word_1927C:	dc.w 2
-	dc.w $20, $F03,	$C454, 0
-	dc.w $40, $403,	$C464, $A
-word_1928E:	dc.w 1
-	dc.w $10, $F03,	$C466, 0
-word_19298:	dc.w 1
-	dc.w 4,	$F03, $C476, 0
-word_192A2:	dc.w 2
-	dc.w $23, $B03,	$C486, 3
-	dc.w $43, $403,	$C492, 8
-word_192B4:	dc.w 1
-	dc.w $20, $F03,	$E494, 0
-word_192BE:	dc.w 1
-	dc.w $20, $F03,	$E4A4, 0
-word_192C8:	dc.w 1
-	dc.w $C, $B03, $E4B4, 6
-word_192D2:	dc.w 1
-	dc.w 2,	$E03, $E4C0, 0
-word_192DC:	dc.w 1
-	dc.w $D, $F03, $E4CC, 0
-word_192E6:	dc.w 1
-	dc.w $1F, $F03,	$C4DC, 0
-word_192F0:	dc.w 1
-	dc.w $27, $E03,	$C4EC, 0
-word_192FA:	dc.w 1
-	dc.w $C, $B03, $C4F8, 2
-word_19304:	dc.w 1
-	dc.w $D, $A03, $C504, 3
-word_1930E:	dc.w 1
-	dc.w 0,	$A03, $C50D, 2
-word_19318:	dc.w 1
-	dc.w 7,	$E03, $C516, 0
-word_19322:	dc.w 1
-	dc.w $D, $E03, $C522, 0
-word_1932C:	dc.w 1
-	dc.w $C, 4, $E52E, $C
-word_19336:	dc.w 1
-	dc.w 4,	$E04, $E52F, 4
-word_19340:	dc.w 1
-	dc.w 0,	$F04, $E53B, 0
-word_1934A:	dc.w 1
-	dc.w 0,	$F04, $E54B, 0
-word_19354:	dc.w 1
-	dc.w 0,	$F04, $855B, 0
-word_1935E:	dc.w 1
-	dc.w 0,	$F04, $856B, 0
+
+; Sprites - Cast
+	include	"resources/mappings/sprite/Cast.asm"	
 	
+; ---------------------------------------------------------------------------
+
+; Sprites - Ending
+	include	"resources/mappings/sprite/Ending.asm"	
+		
 ; ---------------------------------------------------------------------------
 
 ; Sprites - Sega Logo
@@ -35718,352 +33495,8 @@ word_1935E:	dc.w 1
 	
 ; ---------------------------------------------------------------------------
 
-off_19610:	dc.l word_197AC
-	dc.l word_197B6
-	dc.l word_197C8
-	dc.l word_197DA
-	dc.l word_197EC
-	dc.l word_197FE
-	dc.l word_19808
-	dc.l word_19812
-	dc.l word_19826
-	dc.l word_19826
-	dc.l word_19830
-	dc.l word_1983A
-	dc.l word_19844
-	dc.l word_1984E
-	dc.l word_19858
-	dc.l word_19862
-	dc.l word_1986C
-	dc.l word_19876
-	dc.l word_19880
-	dc.l word_1988A
-	dc.l word_19894
-	dc.l word_1989E
-	dc.l word_198A8
-	dc.l word_198B2
-	dc.l word_198BC
-	dc.l word_198C6
-	dc.l word_198F0
-	dc.l word_1991A
-	dc.l word_19944
-	dc.l word_1994E
-	dc.l word_19958
-	dc.l word_19962
-	dc.l word_1996C
-	dc.l word_19976
-	dc.l word_19980
-	dc.l word_1998A
-	dc.l word_19994
-	dc.l word_1999E
-	dc.l word_199A8
-	dc.l word_199B2
-	dc.l word_199BC
-	dc.l word_199CE
-	dc.l word_199E0
-	dc.l word_199F2
-	dc.l word_19A04
-	dc.l word_19A16
-	dc.l word_19A28
-	dc.l word_19A32
-	dc.l word_19A3C
-	dc.l word_19A46
-	dc.l word_19A50
-	dc.l word_19A5A
-	dc.l word_19A64
-	dc.l word_19A6E
-	dc.l word_19A78
-	dc.l word_19A8A
-	dc.l word_19A9C
-	dc.l word_19AAE
-	dc.l word_19ACA
-	dc.l word_19AD4
-	dc.l word_19ADE
-	dc.l word_19AE8
-	dc.l word_19AF2
-	dc.l word_19B04
-	dc.l word_19B16
-	dc.l word_19B28
-	dc.l word_19B3A
-	dc.l word_19AC0
-	dc.l word_19B44
-	dc.l word_19B56
-	dc.l word_19B68
-	dc.l word_19B7A
-	dc.l word_19B8C
-	dc.l word_19B9E
-	dc.l word_19BA8
-	dc.l word_19BB2
-	dc.l word_19BBC
-	dc.l word_19BC6
-	dc.l word_19BD0
-	dc.l word_19C2A
-	dc.l word_19C34
-	dc.l word_19C3E
-	dc.l word_19C48
-	dc.l word_19BDA
-	dc.l word_19BE4
-	dc.l word_19BEE
-	dc.l word_19BF8
-	dc.l word_19C02
-	dc.l word_19C0C
-	dc.l word_19C16
-	dc.l word_19C20
-	dc.l word_19C52
-	dc.l word_19C5C
-	dc.l word_19C66
-	dc.l word_19C70
-	dc.l word_19C7A
-	dc.l word_19C84
-	dc.l word_19C8E
-	dc.l word_19C98
-	dc.l word_19CA2
-	dc.l word_19CAC
-	dc.l word_19CB6
-	dc.l word_19CC8
-word_197AC:	dc.w 2
-	dc.w 0,	3, $3FF, 0
-word_197B6:	dc.w 2
-	dc.w $FFE0, $A03, $637B, $FFF8
-	dc.w $FFF8, $403, $6384, $FFF8
-word_197C8:	dc.w 2
-	dc.w $FFE0, $A03, $6386, $FFF8
-	dc.w $FFF8, $403, $638F, $FFF8
-word_197DA:	dc.w 2
-	dc.w $FFE0, $A03, $391,	$FFF8
-	dc.w $FFF8, $403, $39A,	$FFF8
-word_197EC:	dc.w 2
-	dc.w $FFE0, $A03, $370,	$FFF8
-	dc.w $FFF8, $403, $379,	$FFF8
-word_197FE:	dc.w 1
-	dc.w $FFFC, 3, $239D, $FFFC
-word_19808:	dc.w 1
-	dc.w $FFFC, 3, $639E, $FFFC
-word_19812:	dc.w 1
-	dc.w $FFFC, 3, $639C, $FFFC
-	dc.w 1
-	dc.w $FFFC, 3, $1FE, $FFFC
-word_19826:	dc.w 1
-	dc.w $FFFC, 3, $1FF, $FFFC
-word_19830:	dc.w 1
-	dc.w $FFFC, $F03, $1FB,	$FFF0
-word_1983A:	dc.w 1
-	dc.w 0,	$F03, $1FB, 0
-word_19844:	dc.w 1
-	dc.w 0,	$F03, $1FB, 0
-word_1984E:	dc.w 1
-	dc.w 0,	$F03, $1FB, 0
-word_19858:	dc.w 1
-	dc.w 0,	$F03, $1FB, 0
-word_19862:	dc.w 1
-	dc.w 0,	$F03, $1FB, 0
-word_1986C:	dc.w 1
-	dc.w $FFE0, $303, $3E5,	0
-word_19876:	dc.w 1
-	dc.w $FFE0, $303, $3E9,	0
-word_19880:	dc.w 1
-	dc.w $FFE0, $303, $3ED,	0
-word_1988A:	dc.w 1
-	dc.w $FFE0, $303, $3F1,	0
-word_19894:	dc.w 1
-	dc.w $FFE0, $303, $3F5,	0
-word_1989E:	dc.w 1
-	dc.w 0,	$F03, $1FB, 0
-word_198A8:	dc.w 1
-	dc.w 0,	3, $39F, 0
-word_198B2:	dc.w 1
-	dc.w 0,	3, $3A0, 1
-word_198BC:	dc.w 1
-	dc.w 1,	3, $3A1, 5
-word_198C6:	dc.w 5
-	dc.w 0,	$503, $63A2, 0
-	dc.w 8,	$703, $63A6, $10
-	dc.w $10, $303,	$63AE, 8
-	dc.w $20, $903,	$63B2, $FFF0
-	dc.w $30, $803,	$63B8, $FFF8
-word_198F0:	dc.w 5
-	dc.w 0,	$503, $63BB, 0
-	dc.w 8,	$703, $63BF, $10
-	dc.w $10, $303,	$63AE, 8
-	dc.w $20, $903,	$63C7, $FFF0
-	dc.w $30, $803,	$63CD, $FFF8
-word_1991A:	dc.w 5
-	dc.w 0,	$503, $63D0, 0
-	dc.w 8,	$703, $63D4, $10
-	dc.w $10, $303,	$63AE, 8
-	dc.w $20, $903,	$63DC, $FFF0
-	dc.w $30, $803,	$63E2, $FFF8
-word_19944:	dc.w 1
-	dc.w $FFFC, $403, $3F9,	$FFF0
-word_1994E:	dc.w 1
-	dc.w $FFF8, $903, $3FB,	$FFE8
-word_19958:	dc.w 1
-	dc.w $FFF4, $E03, $401,	$FFDC
-word_19962:	dc.w 1
-	dc.w $FFF4, $E03, $419,	$FFDC
-word_1996C:	dc.w 1
-	dc.w $FFF4, $E03, $40D,	$FFDC
-word_19976:	dc.w 1
-	dc.w $FFF4, $A03, $425,	$FFDC
-word_19980:	dc.w 1
-	dc.w $FFE0, $B03, $644C, $FFF4
-word_1998A:	dc.w 1
-	dc.w $FFE0, $B03, $6458, $FFF4
-word_19994:	dc.w 1
-	dc.w $FFE0, $B03, $6464, $FFF4
-word_1999E:	dc.w 1
-	dc.w $FFE0, $B03, $2470, $FFF4
-word_199A8:	dc.w 1
-	dc.w $FFE0, $B03, $247C, $FFF4
-word_199B2:	dc.w 1
-	dc.w $FFE0, $B03, $2488, $FFF4
-word_199BC:	dc.w 2
-	dc.w $FFF0, $903, $446,	$FFF4
-	dc.w $FFE0, $903, $42E,	$FFF4
-word_199CE:	dc.w 2
-	dc.w $FFF0, $903, $446,	$FFF4
-	dc.w $FFE0, $903, $434,	$FFF4
-word_199E0:	dc.w 2
-	dc.w $FFF0, $903, $446,	$FFF4
-	dc.w $FFE0, $903, $43A,	$FFF4
-word_199F2:	dc.w 2
-	dc.w $FFF0, $903, $446,	$FFF4
-	dc.w $FFE1, $903, $42E,	$FFF4
-word_19A04:	dc.w 2
-	dc.w $FFF0, $903, $446,	$FFF4
-	dc.w $FFE1, $903, $434,	$FFF4
-word_19A16:	dc.w 2
-	dc.w $FFF0, $903, $446,	$FFF4
-	dc.w $FFE1, $903, $43A,	$FFF4
-word_19A28:	dc.w 1
-	dc.w $FFFC, 3, $2495, $FFFC
-word_19A32:	dc.w 1
-	dc.w $FFFC, 3, $2494, $FFFC
-word_19A3C:	dc.w 1
-	dc.w $FFFC, 3, $2C95, $FFFC
-word_19A46:	dc.w 1
-	dc.w $FFFC, 3, $2C94, $FFFC
-word_19A50:	dc.w 1
-	dc.w $FFFC, 3, $3495, $FFFC
-word_19A5A:	dc.w 1
-	dc.w $FFFC, 3, $3494, $FFFC
-word_19A64:	dc.w 1
-	dc.w $FFFC, 3, $3C95, $FFFC
-word_19A6E:	dc.w 1
-	dc.w $FFFC, 3, $3C94, $FFFC
-word_19A78:	dc.w 2
-	dc.w $FFD0, $603, $2496, 8
-	dc.w $FFE8, $A03, $249C, $FFF8
-word_19A8A:	dc.w 2
-	dc.w $FFC8, $A03, $24A5, $FFF8
-	dc.w $FFE0, $B03, $24AE, $FFF8
-word_19A9C:	dc.w 2
-	dc.w $FFD0, $603, $2C96, $FFF0
-	dc.w $FFE8, $A03, $2C9C, $FFF8
-word_19AAE:	dc.w 2
-	dc.w $FFE0, $F03, $A2E9, $FFEC
-	dc.w $FFF0, $103, $A2F9, $C
-word_19AC0:	dc.w 1
-	dc.w $FFE0, $F03, $A2E9, $FFEC
-word_19ACA:	dc.w 1
-	dc.w $FFF8, $502, $E383, $FFF8
-word_19AD4:	dc.w 1
-	dc.w $FFF8, $502, $E387, $FFF8
-word_19ADE:	dc.w 1
-	dc.w $FFF8, $502, $E38B, $FFF8
-word_19AE8:	dc.w 1
-	dc.w $FFF8, $502, $E38F, $FFF8
-word_19AF2:	dc.w 2
-	dc.w $FFF8, $502, $8383, $FFF8
-	dc.w 0,	$402, $C393, $FFF6
-word_19B04:	dc.w 2
-	dc.w $FFF8, $502, $8387, $FFF8
-	dc.w 0,	$402, $C395, $FFF6
-word_19B16:	dc.w 2
-	dc.w $FFF8, $502, $838B, $FFF8
-	dc.w 0,	$402, $C397, $FFF6
-word_19B28:	dc.w 2
-	dc.w $FFF8, $502, $838F, $FFF8
-	dc.w 0,	$402, $C393, $FFF6
-word_19B3A:	dc.w 1
-	dc.w 0,	$402, $C30F, $FFF6
-word_19B44:	dc.w 2
-	dc.w $FFD8, $303, $24E0, $FFFC
-	dc.w $FFF8, 3, $24E4, $FFFC
-word_19B56:	dc.w 2
-	dc.w $FFD8, $303, $24E5, $FFFC
-	dc.w $FFF8, 3, $24E4, $FFFC
-word_19B68:	dc.w 2
-	dc.w $FFD8, $303, $24E9, $FFFC
-	dc.w $FFF8, 3, $24ED, $FFFC
-word_19B7A:	dc.w 2
-	dc.w $FFD8, $303, $24EE, $FFFC
-	dc.w $FFF8, 3, $24F2, $FFFC
-word_19B8C:	dc.w 2
-	dc.w $FFD8, $303, $24F3, $FFFC
-	dc.w $FFF8, 3, $24F2, $FFFC
-word_19B9E:	dc.w 1
-	dc.w $FFFC, 3, $4097, $FFFC
-word_19BA8:	dc.w 1
-	dc.w $FFFC, 3, $4098, $FFFC
-word_19BB2:	dc.w 1
-	dc.w $FFFC, 3, $4099, $FFFC
-word_19BBC:	dc.w 1
-	dc.w $FFFC, 3, $409A, $FFFC
-word_19BC6:	dc.w 1
-	dc.w $FFFC, 3, $409B, $FFFC
-word_19BD0:	dc.w 1
-	dc.w $FFFC, 3, $409C, $FFFC
-word_19BDA:	dc.w 1
-	dc.w $FFFC, 3, $409D, $FFFC
-word_19BE4:	dc.w 1
-	dc.w $FFFC, 3, $409E, $FFFC
-word_19BEE:	dc.w 1
-	dc.w $FFFC, 3, $409F, $FFFC
-word_19BF8:	dc.w 1
-	dc.w $FFFC, 3, $40A0, $FFFC
-word_19C02:	dc.w 1
-	dc.w $FFFC, 3, $40A1, $FFFC
-word_19C0C:	dc.w 1
-	dc.w $FFFC, 3, $40A2, $FFFC
-word_19C16:	dc.w 1
-	dc.w $FFFC, 3, $40A3, $FFFC
-word_19C20:	dc.w 1
-	dc.w $FFFC, 3, $40A4, $FFFC
-word_19C2A:	dc.w 1
-	dc.w $FFFC, 2, $A080, $FFFC
-word_19C34:	dc.w 1
-	dc.w $FFF8, $502, $A081, $FFF8
-word_19C3E:	dc.w 1
-	dc.w $FFF8, $502, $A085, $FFF8
-word_19C48:	dc.w 1
-	dc.w $FFF8, $502, $A089, $FFF8
-word_19C52:	dc.w 1
-	dc.w $FFF8, $502, $E3AE, $FFF8
-word_19C5C:	dc.w 1
-	dc.w $FFF8, $902, $E3B2, $FFF0
-word_19C66:	dc.w 1
-	dc.w $FFF8, $902, $E3B8, $FFF0
-word_19C70:	dc.w 1
-	dc.w $FFF8, $502, $E3BE, $FFF8
-word_19C7A:	dc.w 1
-	dc.w $FFF8, $502, $E338, $FFF8
-word_19C84:	dc.w 1
-	dc.w $FFF8, $A02, $E3C2, $FFF8
-word_19C8E:	dc.w 1
-	dc.w $FFF8, $A02, $E3CB, $FFF8
-word_19C98:	dc.w 1
-	dc.w $FFF8, $500, $E396, $FFF8
-word_19CA2:	dc.w 1
-	dc.w $FFF8, $500, $E39A, $FFF8
-word_19CAC:	dc.w 1
-	dc.w $FFF8, $500, $E39E, $FFF8
-word_19CB6:	dc.w 2
-	dc.w $FFF0, $100, $E3A2, $FFF0
-	dc.w $FFF8, $500, $E39A, $FFF8
-word_19CC8:	dc.w 2
-	dc.w $FFF0, $100, $E3A4, $FFF0
-	dc.w $FFF8, $500, $E39A, $FFF8
+; Sprites - Misc
+	include	"resources/mappings/sprite/Misc.asm"	
 	
 ; ---------------------------------------------------------------------------
 
@@ -45962,11 +43395,11 @@ ArtNem_SegaLogo:
 	even
 	
 ArtNem_DifficultyFaces:
-	incbin	"resources/art/art_nem/compressed/2P - Difficulty Faces (1P).nem"
+	incbin	"resources/art/art_nem/compressed/Select Level - Faces (Lv 1, 3, 5).nem"
 	even
 	
 ArtNem_DifficultyFaces2:
-	incbin	"resources/art/art_nem/compressed/2P - Difficulty Faces (2P).nem"
+	incbin	"resources/art/art_nem/compressed/Select Level - Faces (Lv 2 & 4).nem"
 	even
 	
 ArtUnc_Robotnik_21:
